@@ -2,7 +2,7 @@
     # http://stackoverflow.com/questions/136178/git-diff-handling-long-lines
     pager = less -r
     editor = /usr/bin/vim
-    excludesfile = /Users/dkajiwara/.gitignore_global 
+    excludesfile = ~/.gitignore_global 
     quotepath = false
 [include]
     path = ~/.gitconfig_local

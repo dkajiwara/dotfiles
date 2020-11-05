@@ -2,6 +2,8 @@
 
 DOT_DIRECTORY="${HOME}/dotfiles"
 
+cd `dirname $0`
+
 echo "Create dotfile links."
 
 for f in .??*

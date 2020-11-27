@@ -19,4 +19,13 @@ done
 
 echo $(tput setaf 2)Deploy dotfiles complete!. ✔︎$(tput sgr0)
 
-brew bundle --global
+echo "brew bundle --global y/n"
+read answer
+case "$answer" in
+  "y")
+    brew bundle --global
+    break ;;
+  *)
+    echo 'Finish!'
+    exit 1;;
+esac

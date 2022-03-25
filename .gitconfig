@@ -38,6 +38,10 @@
     s = status --short --branch
     st = status
     su = submodule update
+
+    # fzf 
+    chb = !git branch -a --sort=-authordate | fzf | xargs git checkout
+
 [gui]
     encoding = utf-8
 [difftool "sourcetree"]

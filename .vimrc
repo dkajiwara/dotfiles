@@ -1,8 +1,11 @@
 "jjでnormalモードに戻る
 inoremap <silent> jj <ESC>
 
+filetype plugin indent on
 "コードの色分け
 syntax on
+set encoding=utf-8
+" set clipboard=unnamedplus
 
 "行番号を表示
 set number
@@ -23,18 +26,27 @@ set expandtab
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
-let g:deoplete#enable_at_startup = 1
+map <C-n> :NERDTreeToggle<CR>
 
-" Use neocomplete.vim
-let g:neocomplete#sources#omni#input_patterns = {
-\   "ruby" : '[^. *\t]\.\w*\|\h\w*::',
-\}
+" If you have vim >=8.0 or Neovim >= 0.1.5
+if (has("termguicolors"))
+  set termguicolors
+endif
 
-" Set async completion.
-let g:monster#completion#rcodetools#backend = "async_rct_complete"
 
-" With deoplete.nvim
-let g:monster#completion#rcodetools#backend = "async_rct_complete"
-let g:deoplete#sources#omni#input_patterns = {
-\   "ruby" : '[^. *\t]\.\w*\|\h\w*::',
-\}
+" Theme
+syntax enable
+colorscheme tender
+let g:airline_theme = 'tender'
+let macvim_skip_colorscheme=1
+
+" vim-gitgutter
+set updatetime=100
+
+call plug#begin()
+Plug 'preservim/nerdtree'
+Plug 'jacoborus/tender.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+call plug#end()
+

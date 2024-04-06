@@ -33,13 +33,6 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-
-" Theme
-syntax enable
-colorscheme tender
-let g:airline_theme = 'tender'
-let macvim_skip_colorscheme=1
-
 " vim-gitgutter
 set updatetime=100
 
@@ -50,3 +43,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 call plug#end()
 
+" Theme
+syntax enable
+colorscheme tender
+let g:airline_theme = 'tender'
+let macvim_skip_colorscheme=1

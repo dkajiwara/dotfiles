@@ -37,7 +37,8 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
 zinit ice as"completion"
 zinit snippet https://github.com/git/git/blob/master/contrib/completion/git-completion.zsh
 
-zinit pack for fzf
+zinit ice from"gh-r" as"program"
+zinit light junegunn/fzf
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
@@ -53,11 +54,14 @@ setopt hist_ignore_dups
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export PATH=/Users/dkajiii/Library/Android/sdk/platform-tools:/Users/dkajiii/.local/share/zinit/polaris/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/Library/Apple/usr/bin
-export PATH="$PATH:/Users/dkajiii/development/flutter/bin"
-export PATH="$PATH":"$HOME/.pub-cache/bin"
-export GOPATH=$HOME/go
-export PATH="$GOPATH/bin:$PATH"
+export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin"
+export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
+export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
+export PATH="$PATH:$HOME/.local/share/zinit/polaris/bin"
+export PATH="$PATH:$HOME/development/flutter/bin"
+export PATH="$PATH:$HOME/.pub-cache/bin"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
 
 [[ -d ~/.rbenv  ]] && \
   export PATH=${HOME}/.rbenv/bin:${PATH} && \
@@ -75,3 +79,4 @@ setopt nonomatch
 
 export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+### End of Zinit's installer chunk

@@ -36,6 +36,10 @@ endif
 " vim-gitgutter
 set updatetime=100
 
+set splitbelow
+set termwinsize=15x0
+set hlsearch
+
 call plug#begin()
 Plug 'preservim/nerdtree'
 Plug 'jacoborus/tender.vim'

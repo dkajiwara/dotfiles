@@ -41,6 +41,7 @@ Plug 'preservim/nerdtree'
 Plug 'jacoborus/tender.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " Theme

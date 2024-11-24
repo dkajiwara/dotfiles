@@ -22,6 +22,9 @@ set tabstop=4
 "tabを半角スペースで表示
 set expandtab
 
+"補完候補がステータスメニュー上に一覧表示
+set wildmenu
+
 "空白文字を可視化
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
@@ -46,6 +49,7 @@ Plug 'jacoborus/tender.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 
 " Theme

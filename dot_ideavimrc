@@ -1,0 +1,3 @@
+inoremap jj <Esc>
+" OSのクリップボードをレジスタ指定無しで Yank, Put 出来るようにする
+set clipboard=unnamed,unnamedplus

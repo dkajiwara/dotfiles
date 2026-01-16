@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install chezmoi
+        run: brew install chezmoi
+
+      - name: Initialize chezmoi
+        run: chezmoi init --source=${{ github.workspace }}
+
+      - name: Test chezmoi apply (dry-run)
+        run: chezmoi apply --dry-run --verbose

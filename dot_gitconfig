@@ -1,59 +1,99 @@
+# ============================================================
+# Core
+# ============================================================
 [core]
-    # http://stackoverflow.com/questions/136178/git-diff-handling-long-lines
     pager = less -r
     editor = /usr/bin/vim
     excludesfile = ~/.gitignore_global
     quotepath = false
+
+# ============================================================
+# Include (ユーザー固有設定)
+# ============================================================
 [include]
     path = ~/.gitconfig_local
+
+# ============================================================
+# Merge / Mergetool
+# ============================================================
 [merge]
-    # from 1.7.6
-    # ff = false
-    keepBackup = false;
+    keepBackup = false
     tool = p4merge
+
 [mergetool "p4merge"]
     cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
     keepTemporaries = false
     trustExitCode = false
     keepBackup = false
+
+# ============================================================
+# Alias
+# ============================================================
 [alias]
+    # Meta
     alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+
+    # Branch / Checkout
     b = branch -a
-    br = browse-remote
-    co = commit
     ch = checkout
+    chb = !git branch -a --sort=-authordate | fzf | xargs git checkout
+
+    # Commit
+    co = commit
+
+    # Diff
     d = diff
     dc = diff --cached
     di = diff
     dic = diff --cached
+
+    # Fetch / Submodule
     f = fetch --prune
     fs = !git f && git su
-    ignore = !([ ! -e .gitignore ] && touch .gitignore) | echo $1 >> .gitignore
-    info = remote show origin
+    su = submodule update
+
+    # Log
     l = log --graph -n 20 --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset'
     ll = log --stat --abbrev-commit
     ln = log --graph -n 20 --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(green)- %an, %cr%Creset' --name-status
     lp = log --oneline -n 20 -p
-    ls = log --stat --abbrev-commit -n 1 # display previous log
+    ls = log --stat --abbrev-commit -n 1
+
+    # Status
     s = status --short --branch
     st = status
-    su = submodule update
 
-    # fzf 
-    chb = !git branch -a --sort=-authordate | fzf | xargs git checkout
+    # Utility
+    br = browse-remote
+    ignore = !([ ! -e .gitignore ] && touch .gitignore) | echo $1 >> .gitignore
+    info = remote show origin
 
+# ============================================================
+# GUI / Difftool / Mergetool
+# ============================================================
 [gui]
     encoding = utf-8
+
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
     path =
+
 [difftool "p4diff"]
     cmd = p4diff
+
 [mergetool "sourcetree"]
     cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
     trustExitCode = true
+
+# ============================================================
+# User
+# ============================================================
 [user]
     name = Daiki Kajiwara
     email = chick.developer@gmail.com
+
+# ============================================================
+# Commit
+# ============================================================
 [commit]
     template = ~/.stCommitMsg

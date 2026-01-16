@@ -1,3 +1,9 @@
+" ============================================================
+" IdeaVim Settings (IntelliJ IDEA)
+" ============================================================
+
+" jj で Normal モードに戻る
 inoremap jj <Esc>
-" OSのクリップボードをレジスタ指定無しで Yank, Put 出来るようにする
+
+" OS クリップボード連携
 set clipboard=unnamed,unnamedplus

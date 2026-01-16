@@ -1,58 +1,77 @@
+# ============================================================
+# fzf (Fuzzy Finder)
+# ============================================================
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
 export FZF_CTRL_T_OPTS='--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
 
-### History
+# ============================================================
+# History
+# ============================================================
 setopt share_history
 setopt hist_reduce_blanks
 setopt hist_no_store
 setopt hist_ignore_dups
 
+# ============================================================
+# Environment Variables
+# ============================================================
+export GOPATH="$HOME/go"
+export PYENV_ROOT="$HOME/.pyenv"
+export NVM_DIR="$HOME/.nvm"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+setopt nonomatch
+
+# ============================================================
+# PATH
+# ============================================================
 export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin"
 export PATH="$PATH:/opt/homebrew/bin:/opt/homebrew/sbin"
 export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 export PATH="$PATH:$HOME/.pub-cache/bin"
-export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
-export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PATH:$PYENV_ROOT/bin"
 export PATH="$PATH:$HOME/.tfenv/bin"
-eval "$(pyenv init -)"
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
+export PATH="$HOME/.nodebrew/current/bin:$PATH"
 
-[[ -d ~/.rbenv  ]] && \
-  export PATH=${HOME}/.rbenv/bin:${PATH} && \
-  eval "$(rbenv init -)"
-
-
-export NVM_DIR="$HOME/.nvm"
- [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
- [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
- # 重複パスを登録しない
+# 重複パスを登録しない
 typeset -U path PATH
 
-setopt nonomatch
+# ============================================================
+# Version Managers
+# ============================================================
+# pyenv
+eval "$(pyenv init -)"
 
-export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-### End of Zinit's installer chunk
+# rbenv
+[[ -d ~/.rbenv ]] && \
+    export PATH="${HOME}/.rbenv/bin:${PATH}" && \
+    eval "$(rbenv init -)"
 
-## [Completion]
-## Completion scripts setup. Remove the following line to uninstall
-[[ -f /Users/dkajiii/.dart-cli-completion/zsh-config.zsh ]] && . /Users/dkajiii/.dart-cli-completion/zsh-config.zsh || true
-## [/Completion]
+# nvm
+[[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ]] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
+# ============================================================
+# Completion
+# ============================================================
+# Dart CLI completion
+[[ -f $HOME/.dart-cli-completion/zsh-config.zsh ]] && source $HOME/.dart-cli-completion/zsh-config.zsh
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/dkajiii/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/dkajiii/google-cloud-sdk/path.zsh.inc'; fi
+# Google Cloud SDK
+[[ -f $HOME/google-cloud-sdk/path.zsh.inc ]] && source $HOME/google-cloud-sdk/path.zsh.inc
+[[ -f $HOME/google-cloud-sdk/completion.zsh.inc ]] && source $HOME/google-cloud-sdk/completion.zsh.inc
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/dkajiii/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/dkajiii/google-cloud-sdk/completion.zsh.inc'; fi
-
+# ============================================================
+# Tools
+# ============================================================
 eval "$(~/.local/bin/mise activate zsh)"
 eval "$(direnv hook zsh)"
 eval "$(sheldon source)"
+
+# ============================================================
+# Prompt
+# ============================================================
 eval "$(starship init zsh)"

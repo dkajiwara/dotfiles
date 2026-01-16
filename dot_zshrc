@@ -19,7 +19,6 @@ setopt hist_ignore_dups
 # ============================================================
 export GOPATH="$HOME/go"
 export PYENV_ROOT="$HOME/.pyenv"
-export NVM_DIR="$HOME/.nvm"
 
 setopt nonomatch
 
@@ -34,7 +33,6 @@ export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:$PYENV_ROOT/bin"
 export PATH="$PATH:$HOME/.tfenv/bin"
 export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
-export PATH="$HOME/.nodebrew/current/bin:$PATH"
 
 # 重複パスを登録しない
 typeset -U path PATH
@@ -50,15 +48,9 @@ eval "$(pyenv init -)"
     export PATH="${HOME}/.rbenv/bin:${PATH}" && \
     eval "$(rbenv init -)"
 
-# nvm
-[[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ]] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-
 # ============================================================
 # Completion
 # ============================================================
-# Dart CLI completion
-[[ -f $HOME/.dart-cli-completion/zsh-config.zsh ]] && source $HOME/.dart-cli-completion/zsh-config.zsh
 
 # Google Cloud SDK
 [[ -f $HOME/google-cloud-sdk/path.zsh.inc ]] && source $HOME/google-cloud-sdk/path.zsh.inc

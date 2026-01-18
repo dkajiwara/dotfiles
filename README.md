@@ -15,6 +15,29 @@ chezmoi init https://github.com/yourusername/dotfiles.git
 chezmoi apply
 ```
 
+## 採用ツール
+
+### シェル・プロンプト
+- **Zsh** - シェル
+- **Starship** - プロンプト（ディレクトリフルパス表示）
+- **Sheldon** - Zsh プラグインマネージャー
+
+### ターミナルマルチプレクサ
+- **tmux** - ターミナルマルチプレクサ
+  - Kanagawa テーマ (Nybkox/tmux-kanagawa)
+  - TPM (Tmux Plugin Manager)
+  - CPU/RAM 使用率、時間表示
+  - Vim ライクなペイン選択
+
+### バージョン管理
+- **mise** - 開発ツールのバージョン管理
+- **pyenv** - Python バージョン管理
+- **tfenv** - Terraform バージョン管理
+
+### エディタ
+- **Vim** - テキストエディタ
+- **IdeaVim** - IntelliJ IDEA の Vim プラグイン
+
 ## 管理ファイル
 
 - `.zshrc` - Zsh 設定
@@ -23,6 +46,8 @@ chezmoi apply
 - `.vimrc` - Vim 設定
 - `.ideavimrc` - IntelliJ Vim 設定
 - `.tmux.conf` - tmux 設定
+- `.config/starship.toml` - Starship 設定
+- `.config/sheldon/plugins.toml` - Sheldon プラグイン設定
 - `.stCommitMsg` - Git コミットテンプレート
 
 ## 更新

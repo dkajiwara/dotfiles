@@ -34,10 +34,6 @@ chezmoi apply
 - **pyenv** - Python バージョン管理
 - **tfenv** - Terraform バージョン管理
 
-### エディタ
-- **Vim** - テキストエディタ
-- **IdeaVim** - IntelliJ IDEA の Vim プラグイン
-
 ## 管理ファイル
 
 - `.zshrc` - Zsh 設定

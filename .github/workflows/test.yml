@@ -20,4 +20,4 @@ jobs:
         run: chezmoi init https://github.com/dkajiwara/dotfiles.git
 
       - name: Test chezmoi apply (dry-run)
-        run: chezmoi apply
+        run: chezmoi apply --dry-run --verbose

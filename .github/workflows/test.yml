@@ -17,7 +17,7 @@ jobs:
         run: brew install chezmoi
 
       - name: Initialize chezmoi
-        run: chezmoi init --source=${{ github.workspace }}
+        run: chezmoi init https://github.com/dkajiwara/dotfiles.git
 
       - name: Test chezmoi apply (dry-run)
-        run: chezmoi apply --dry-run --verbose
+        run: chezmoi apply

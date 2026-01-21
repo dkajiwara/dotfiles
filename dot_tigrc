@@ -2,31 +2,11 @@
 # Main View Settings
 # ============================================================
 # コミット一覧の表示順序をカスタマイズ
-# 日付、作者、ID、コミットメッセージの順に表示（commit-title は最後に配置）
-# set main-view = date:relative author:width=15 id:width=8 commit-title:graph=yes,refs=yes
 set main-view = id date author commit-title:graph=yes,refs=yes
-
-# ============================================================
-# General Settings
-# ============================================================
-# 行番号を表示（新形式）
-set blame-view = date:default author:full file-name:auto id:yes line-number:yes,interval=1 text
-set grep-view = file-name:yes line-number:yes,interval=1 text
-
-# タブ幅
-set tab-size = 4
-
-# 差分の表示設定
-set diff-options = -m --first-parent
-set ignore-space = some
 
 # ============================================================
 # Key Bindings
 # ============================================================
-# Vim ライクなキーバインド
-bind generic g move-first-line
-bind generic G move-last-line
-
 # リフレッシュ
 bind generic R refresh
 
@@ -36,56 +16,3 @@ bind generic R refresh
 # 日付フォーマットをカスタマイズ
 set main-view-date = custom
 set main-view-date-format = "%Y-%m-%d %H:%M"
-
-# マージコミットも全て表示
-set commit-order = default
-
-# 差分表示の改善
-set diff-highlight = true
-set split-view-height = 80%
-
-# 横スクロールを有効化
-set horizontal-scroll = 33%
-
-# マウスを有効化
-set mouse = true
-
-# 履歴の表示数を増やす
-set main-options = --all
-
-# 空白の差分を見やすく
-set ignore-space = at-eol
-
-# ============================================================
-# Vim ライクなキーバインドを追加
-# ============================================================
-# 検索
-bind generic / search
-bind generic ? search-back
-bind generic n find-next
-bind generic N find-prev
-
-# ページ移動（Ctrl-d/u は既にデフォルトで設定済み）
-bind generic <Ctrl-f> move-page-down
-bind generic <Ctrl-b> move-page-up
-
-# ============================================================
-# 便利なキーバインド
-# ============================================================
-# コミット ID をクリップボードにコピー（要 pbcopy）
-bind generic Y !@sh -c "echo -n %(commit) | pbcopy"
-
-# ファイルを開く
-bind generic O !@sh -c "vim %(file)"
-
-# GitHub でコミットを開く（リモートが github の場合）
-bind generic B !@sh -c "open 'https://github.com/$(git config --get remote.origin.url | sed 's/.*://;s/.git$//')/commit/%(commit)'"
-
-# ステージング操作
-bind status P !git add -p %(file)
-bind status C !git commit
-
-# ============================================================
-# Color Settings
-# ============================================================
-# デフォルトの色設定を使用（必要に応じてカスタマイズ可能）

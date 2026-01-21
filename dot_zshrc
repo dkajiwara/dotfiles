@@ -52,7 +52,7 @@ eval "$(pyenv init -)"
 # ============================================================
 # Tools
 # ============================================================
-eval "$(~/.local/bin/mise activate zsh)"
+eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
 eval "$(sheldon source)"
 

@@ -1,0 +1,35 @@
+# ============================================================
+# Main View Settings
+# ============================================================
+# コミット一覧の表示順序をカスタマイズ
+# 日付、作者、ID、コミットメッセージの順に表示（commit-title は最後に配置）
+set main-view = date:relative author:width=15 id:width=8 commit-title:graph=yes,refs=yes
+
+# ============================================================
+# General Settings
+# ============================================================
+# 行番号を表示（新形式）
+set blame-view = date:default author:full file-name:auto id:yes line-number:yes,interval=1 text
+set grep-view = file-name:yes line-number:yes,interval=1 text
+
+# タブ幅
+set tab-size = 4
+
+# 差分の表示設定
+set diff-options = -m --first-parent
+set ignore-space = some
+
+# ============================================================
+# Key Bindings
+# ============================================================
+# Vim ライクなキーバインド
+bind generic g move-first-line
+bind generic G move-last-line
+
+# リフレッシュ
+bind generic R refresh
+
+# ============================================================
+# Color Settings
+# ============================================================
+# デフォルトの色設定を使用（必要に応じてカスタマイズ可能）

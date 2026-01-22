@@ -31,6 +31,7 @@ export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
 export PATH="$PATH:$HOME/.pub-cache/bin"
 export PATH="$PATH:$PYENV_ROOT/bin"
 export PATH="$PATH:$HOME/.tfenv/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 # 重複パスを登録しない
 typeset -U path PATH

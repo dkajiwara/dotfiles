@@ -45,6 +45,12 @@ eval "$(pyenv init -)"
 # ============================================================
 # Completion
 # ============================================================
+autoload -U compinit && compinit
+
+# carapace
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
 
 # Google Cloud SDK
 [[ -f $HOME/google-cloud-sdk/path.zsh.inc ]] && source $HOME/google-cloud-sdk/path.zsh.inc

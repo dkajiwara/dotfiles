@@ -63,6 +63,9 @@
     s = status --short --branch
     st = status
 
+    # Push
+    push-f = push --force-with-lease
+
     # Utility
     br = browse-remote
     ignore = !([ ! -e .gitignore ] && touch .gitignore) | echo $1 >> .gitignore

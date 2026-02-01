@@ -65,6 +65,21 @@ eval "$(direnv hook zsh)"
 eval "$(sheldon source)"
 
 # ============================================================
+# ghq
+# ============================================================
+# ghq で管理しているリポジトリを fzf で選択して cd
+ghq-cd() {
+  local repo=$(ghq list | fzf --preview "ls -la $(ghq root)/{}" --preview-window=right:60%)
+  if [ -n "$repo" ]; then
+    cd "$(ghq root)/$repo"
+  fi
+}
+alias gc='ghq-cd'
+
+# ghq get のエイリアス
+alias gg='ghq get'
+
+# ============================================================
 # Prompt
 # ============================================================
 eval "$(starship init zsh)"

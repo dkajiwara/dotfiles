@@ -17,11 +17,16 @@ watchlist:
   - AAPL    # Apple Inc.
   - MSFT    # Microsoft Corporation
   - INTC    # Intel Corporation
+  - BABA    # Alibaba Group Holding
+  - AMZN    # Amazon.com, Inc.
+  - SNOW    # Snowflake Inc.
+  - NVDA    # NVIDIA Corporation
+  - ARM     # Arm Holdings plc
+  - TSLA    # Tesla, Inc.
   - U       # Unity Software Inc.
   - RPRX    # Royalty Pharma plc
   - PLTR    # Palantir Technologies Inc.
   - GTLB    # GitLab Inc.
-  - VHT     # Vanguard Health Care Index Fund ETF
   - T       # AT&T Inc.
   - ZM      # Zoom Communications Inc.
   - VZ      # Verizon Communications Inc.
@@ -29,9 +34,20 @@ watchlist:
   - PFE     # Pfizer Inc.
   - TSM     # Taiwan Semiconductor Manufacturing Company
 
+  # ETF
+  - VHT     # Vanguard Health Care Index Fund ETF
+  - CWEB    # Direxion Daily CSI China Internet Index Bull 2X Shares
+  - TLT     # iShares 20+ Year Treasury Bond ETF
+  - VGSH    # Vanguard Short-Term Treasury ETF
+  - AGG     # iShares Core U.S. Aggregate Bond ETF
+  - SOXL    # Direxion Daily Semiconductor Bull 3X Shares
+
   # アジア株
   - 2412.TW # Chunghwa Telecom Co.
   - 5020.T  # ENEOS ホールディングス
+
+  # その他（未上場・データ取得不可の可能性あり）
+  # - FIG     # Figma, Inc. (私企業のため取得不可)
 
 # 保有資産（オプション）
 # lots:

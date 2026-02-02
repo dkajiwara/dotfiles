@@ -3,10 +3,20 @@
 
 # ウォッチリスト（監視する銘柄）
 watchlist:
+  # インデックス
   - ^N225   # Nikkei 225
   - ^DJI    # Dow Jones Industrial Average
   - ^IXIC   # NASDAQ Composite
   - ^TNX    # CBOE Interest Rate 10 Year T Note
+  - ^FTSE   # FTSE 100
+  - ^HSI    # HANG SENG INDEX
+  - ^TWII   # TWSE Capitalization Weighted Stock Index
+
+  # 米国株
+  - GOOG    # Alphabet Inc.
+  - AAPL    # Apple Inc.
+  - MSFT    # Microsoft Corporation
+  - INTC    # Intel Corporation
   - U       # Unity Software Inc.
   - RPRX    # Royalty Pharma plc
   - PLTR    # Palantir Technologies Inc.
@@ -15,6 +25,13 @@ watchlist:
   - T       # AT&T Inc.
   - ZM      # Zoom Communications Inc.
   - VZ      # Verizon Communications Inc.
+  - KOS     # Kosmos Energy Ltd.
+  - PFE     # Pfizer Inc.
+  - TSM     # Taiwan Semiconductor Manufacturing Company
+
+  # アジア株
+  - 2412.TW # Chunghwa Telecom Co.
+  - 5020.T  # ENEOS ホールディングス
 
 # 保有資産（オプション）
 # lots:

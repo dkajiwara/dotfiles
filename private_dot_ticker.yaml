@@ -1,0 +1,31 @@
+# ticker configuration
+# https://github.com/achannarasappa/ticker
+
+# ウォッチリスト（監視する銘柄）
+watchlist:
+  - AAPL
+  - GOOGL
+  - MSFT
+  - TSLA
+
+# 保有資産（オプション）
+# lots:
+#   - symbol: AAPL
+#     quantity: 10
+#     unit_cost: 150.00
+
+# 表示設定
+show-summary: true
+show-tags: true
+show-fundamentals: true
+show-separator: true
+show-holdings: true
+
+# 並び替え
+sort: alpha
+
+# 通貨
+currency: USD
+
+# リフレッシュ間隔（秒）
+interval: 5

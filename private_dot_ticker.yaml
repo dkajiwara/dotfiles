@@ -52,6 +52,7 @@ watchlist:
   - VGSH    # Vanguard Short-Term Treasury ETF
   - AGG     # iShares Core U.S. Aggregate Bond ETF
   - SOXL    # Direxion Daily Semiconductor Bull 3X Shares
+  - SPXS    # Direxion Daily S&P 500 Bear 3X Shares
 
   # アジア株
   - 2412.TW # Chunghwa Telecom Co.

@@ -21,8 +21,19 @@ watchlist:
   - AMZN    # Amazon.com, Inc.
   - SNOW    # Snowflake Inc.
   - NVDA    # NVIDIA Corporation
+  - AMD     # Advanced Micro Devices
   - ARM     # Arm Holdings plc
   - TSLA    # Tesla, Inc.
+  - DNUT    # Krispy Kreme, Inc.
+  - UNH     # UnitedHealth Group Inc.
+  - NUE     # Nucor Corporation
+  - AVGO    # Broadcom Inc.
+  - RTX     # RTX Corporation
+  - XOM     # Exxon Mobil Corporation
+  - NET     # Cloudflare, Inc.
+  - QUBT    # Quantum Computing Inc.
+  - BLK     # BlackRock, Inc.
+  - ORCL    # Oracle Corporation
   - U       # Unity Software Inc.
   - RPRX    # Royalty Pharma plc
   - PLTR    # Palantir Technologies Inc.

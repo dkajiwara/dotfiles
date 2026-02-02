@@ -44,11 +44,18 @@ typeset -U path PATH
 eval "$(pyenv init -)"
 
 # ============================================================
+# Tools
+# ============================================================
+eval "$(mise activate zsh)"
+eval "$(direnv hook zsh)"
+eval "$(sheldon source)"
+
+# ============================================================
 # Completion
 # ============================================================
 autoload -U compinit && compinit
 
-# carapace
+# carapace (mise でインストールされるため、mise activate の後に配置)
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
@@ -56,13 +63,6 @@ source <(carapace _carapace)
 # Google Cloud SDK
 [[ -f $HOME/google-cloud-sdk/path.zsh.inc ]] && source $HOME/google-cloud-sdk/path.zsh.inc
 [[ -f $HOME/google-cloud-sdk/completion.zsh.inc ]] && source $HOME/google-cloud-sdk/completion.zsh.inc
-
-# ============================================================
-# Tools
-# ============================================================
-eval "$(mise activate zsh)"
-eval "$(direnv hook zsh)"
-eval "$(sheldon source)"
 
 # ============================================================
 # ghq

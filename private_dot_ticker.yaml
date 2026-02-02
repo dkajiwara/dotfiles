@@ -3,10 +3,18 @@
 
 # ウォッチリスト（監視する銘柄）
 watchlist:
-  - AAPL
-  - GOOGL
-  - MSFT
-  - TSLA
+  - ^N225   # Nikkei 225
+  - ^DJI    # Dow Jones Industrial Average
+  - ^IXIC   # NASDAQ Composite
+  - ^TNX    # CBOE Interest Rate 10 Year T Note
+  - U       # Unity Software Inc.
+  - RPRX    # Royalty Pharma plc
+  - PLTR    # Palantir Technologies Inc.
+  - GTLB    # GitLab Inc.
+  - VHT     # Vanguard Health Care Index Fund ETF
+  - T       # AT&T Inc.
+  - ZM      # Zoom Communications Inc.
+  - VZ      # Verizon Communications Inc.
 
 # 保有資産（オプション）
 # lots:

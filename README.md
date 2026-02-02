@@ -51,6 +51,9 @@ chezmoi apply
 - **rg (ripgrep)** - 高速テキスト検索
 - **bat** - syntax highlighting 付き cat
 
+### その他のツール
+- **ticker** - 株価・仮想通貨価格の TUI モニター
+
 ## 管理ファイル
 
 - `.zshrc` - Zsh 設定
@@ -63,6 +66,7 @@ chezmoi apply
 - `.config/starship.toml` - Starship 設定
 - `.config/sheldon/plugins.toml` - Sheldon プラグイン設定
 - `.config/lazygit/config.yml` - lazygit 設定
+- `.ticker.yaml` - ticker 設定
 - `.stCommitMsg` - Git コミットテンプレート
 
 ## キーバインド

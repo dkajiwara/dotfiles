@@ -49,6 +49,7 @@ eval "$(pyenv init -)"
 eval "$(mise activate zsh)"
 eval "$(direnv hook zsh)"
 eval "$(sheldon source)"
+eval "$(zoxide init zsh)"
 
 # ============================================================
 # Completion

@@ -4,6 +4,7 @@ macos-titlebar-style = transparent
 cursor-style = block
 cursor-style-blink = true
 shell-integration-features = no-cursor
+desktop-notifications = true
 
 # https://github.com/ghostty-org/ghostty/issues/5372#issuecomment-2614259192
 font-feature = -calt

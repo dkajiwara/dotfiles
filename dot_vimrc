@@ -6,6 +6,7 @@ set number
 set title
 set nobackup
 set hlsearch
+set clipboard=unnamed
 
 " ============================================================
 " Key Mappings

@@ -1,0 +1,104 @@
+{
+  "cleanupPeriodDays": 30,
+  "env": {
+    "BASH_DEFAULT_TIMEOUT_MS": "600000",
+    "BASH_MAX_TIMEOUT_MS": "600000",
+    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "true"
+  },
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Edit",
+      "Glob",
+      "GlobTool",
+      "Grep",
+      "GrepTool",
+      "LS",
+      "MultiEdit",
+      "Read",
+      "TodoRead",
+      "TodoWrite",
+      "WebFetch",
+      "WebSearch",
+      "Write",
+      "mcp__pencil"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~/*)",
+      "Bash(rm -rf ../*)",
+      "Bash(sudo:*)",
+      "Bash(dd:*)",
+      "Bash(mkfs:*)",
+      "Bash(chmod 777:*)",
+      "Bash(chmod -R 777:*)",
+      "Bash(chown -R:*)",
+      "Bash(git checkout:*)",
+      "Bash(git config:*)",
+      "Bash(git rebase -i:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git restore:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(pip install:*)",
+      "Bash(npm install -g:*)",
+      "Bash(gem install:*)",
+      "Bash(bundle install:*)",
+      "Bash(gh repo delete:*)",
+      "Bash(gh repo create:*)",
+      "Bash(gh repo fork:*)",
+      "Bash(gh repo edit:*)",
+      "Bash(gh repo rename:*)",
+      "Bash(gh repo archive:*)",
+      "Bash(gh repo unarchive:*)",
+      "Bash(gh repo deploy-key:*)",
+      "Bash(gh release create:*)",
+      "Bash(gh release delete:*)",
+      "Bash(gh release upload:*)",
+      "Bash(gh gist create:*)",
+      "Bash(gh gist delete:*)",
+      "Bash(gh secret set:*)",
+      "Bash(gh secret delete:*)",
+      "Bash(gh ssh-key add:*)",
+      "Bash(gh ssh-key delete:*)",
+      "Bash(gh gpg-key add:*)",
+      "Bash(gh gpg-key delete:*)",
+      "Bash(gh auth logout:*)",
+      "Bash(gh auth refresh:*)",
+      "Bash(gh api --method DELETE:*)",
+      "Bash(gh workflow disable:*)",
+      "Bash(gh workflow enable:*)",
+      "Bash(gh workflow run:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/deny-check.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/check-continue.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "language": "japanese"
+}

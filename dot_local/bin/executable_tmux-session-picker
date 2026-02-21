@@ -1,0 +1,34 @@
+#!/bin/bash
+# ==============================================================================
+# tmux-session-picker
+# ==============================================================================
+# tmux セッションを fzf で選択・切り替えするスクリプト
+#
+# 機能:
+#   - セッション一覧を fzf で表示
+#   - Enter: 選択したセッションにアタッチ
+#   - プレビュー: 選択中のセッションのウィンドウ一覧を表示
+#
+# 使用方法:
+#   tmux-session-picker
+#
+# tmux.conf での設定例:
+#   bind s display-popup -w80% -h80% -E "tmux-session-picker"
+#
+# 依存:
+#   - tmux
+#   - fzf
+# ==============================================================================
+
+set -euo pipefail
+
+session=$(tmux list-sessions -F "#{session_name}: #{session_windows} windows#{?session_attached, (attached),}" | grep -v "(attached)" | \
+  fzf --height=100% --reverse \
+  --prompt "Select session: " \
+  --preview 'session={1}; session=${session%%:*}; tmux capture-pane -t "$session" -p -e 2>/dev/null || echo "(no content)"' \
+  --preview-window "right:60%" | \
+  cut -d: -f1)
+
+if [ -n "$session" ]; then
+  TMUX= tmux attach-session -t "$session"
+fi

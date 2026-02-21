@@ -51,6 +51,11 @@ chezmoi apply
 - **rg (ripgrep)** - 高速テキスト検索
 - **bat** - syntax highlighting 付き cat
 
+### AI アシスタント
+- **Claude Code** - Anthropic の CLI アシスタント
+  - tmux popup でセッション永続化
+  - OSC 9 デスクトップ通知（Ghostty 連携）
+
 ### その他のツール
 - **ticker** - 株価・仮想通貨価格の TUI モニター
 
@@ -68,6 +73,9 @@ chezmoi apply
 - `.config/lazygit/config.yml` - lazygit 設定
 - `.ticker.yaml` - ticker 設定
 - `.stCommitMsg` - Git コミットテンプレート
+- `.local/bin/tmux-session-picker` - tmux セッション選択スクリプト
+- `.claude/settings.json` - Claude Code 設定
+- `.claude/scripts/notify.sh` - Claude Code 通知スクリプト（OSC 9）
 
 ## キーバインド
 
@@ -77,10 +85,13 @@ chezmoi apply
 |------|------|
 | `prefix + g` | lazygit を popup で起動 |
 | `prefix + f` | fzf でファイル検索・プレビュー |
-| `prefix + t` | popup シェル（セッション永続化） |
-| `prefix + s` | fzf でセッション選択 |
+| `prefix + t` | popup シェル（セッション永続化、ログインシェル） |
+| `prefix + D` | popup セッションを削除 |
+| `prefix + s` | fzf でセッション選択（ペイン内容プレビュー付き） |
 | `prefix + p` | ghq リポジトリを選択して cd |
 | `prefix + m` | man ページを popup で表示 |
+| `prefix + y` | Claude Code を popup で起動（セッション永続化） |
+| `prefix + Y` | Claude Code セッションを終了 |
 
 ### zsh エイリアス
 

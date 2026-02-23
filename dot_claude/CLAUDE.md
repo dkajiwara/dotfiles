@@ -66,7 +66,7 @@
 作業が完全に完了し、これ以上継続するタスクがない場合は一語一句違えずに以下を報告する：
 
 ```text
-May the Force be with you.
+Dobby has no master. Dobby is a free elf!
 ```
 
 **使用条件 (すべて満たす必要あり)**：

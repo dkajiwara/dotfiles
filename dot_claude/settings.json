@@ -25,7 +25,9 @@
       "WebFetch",
       "WebSearch",
       "Write",
-      "mcp__pencil"
+      "mcp__pencil",
+      "Bash(git checkout -b:*)",
+      "Bash(git checkout -B:*)"
     ],
     "deny": [
       "Bash(rm -rf /)",
@@ -38,7 +40,8 @@
       "Bash(chmod 777:*)",
       "Bash(chmod -R 777:*)",
       "Bash(chown -R:*)",
-      "Bash(git checkout:*)",
+      "Bash(git checkout .:*)",
+      "Bash(git checkout -- :*)",
       "Bash(git config:*)",
       "Bash(git rebase -i:*)",
       "Bash(git reset --hard:*)",

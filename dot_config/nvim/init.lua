@@ -211,6 +211,19 @@ require("lazy").setup({
     },
     config = function()
       require("telescope").setup()
+      require("telescope").load_extension("projects")
+    end,
+  },
+
+  -- Project manager
+  {
+    "ahmedkhalf/project.nvim",
+    lazy = false,
+    config = function()
+      require("project_nvim").setup({
+        detection_methods = { "pattern", "lsp" },
+        patterns = { ".git", "package.json", "Cargo.toml", "go.mod" },
+      })
     end,
   },
 
@@ -218,7 +231,7 @@ require("lazy").setup({
   {
     "nvimdev/dashboard-nvim",
     event = "VimEnter",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", "ahmedkhalf/project.nvim" },
     config = function()
       require("dashboard").setup({
         theme = "hyper",
@@ -236,7 +249,15 @@ require("lazy").setup({
           shortcut = {
             { desc = "  Find File",  group = "Label", action = "Telescope find_files", key = "f" },
             { desc = "  Recent",     group = "Label", action = "Telescope oldfiles",   key = "r" },
+            { desc = "  Projects",   group = "Label", action = "Telescope projects",   key = "p" },
             { desc = "  Quit",       group = "Label", action = "qa",                   key = "q" },
+          },
+          project = {
+            enable = true,
+            limit = 8,
+            icon = " ",
+            label = "Recent Projects",
+            action = "Telescope find_files cwd=",
           },
         },
       })

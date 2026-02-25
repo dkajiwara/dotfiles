@@ -165,7 +165,20 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
-        options = { theme = "auto" },
+        options = {
+          theme = "kanagawa",
+          globalstatus = true,
+          section_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
+        },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch", "diff", "diagnostics" },
+          lualine_c = { "filename" },
+          lualine_x = { "encoding", "fileformat", "filetype" },
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
+        },
       })
     end,
   },
@@ -184,6 +197,50 @@ require("lazy").setup({
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     build = "cd app && npx --yes yarn install",
+  },
+
+  -- Fuzzy finder
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = "Telescope",
+    keys = {
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<leader>fr", "<cmd>Telescope oldfiles<cr>",   desc = "Recent Files" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Live Grep" },
+    },
+    config = function()
+      require("telescope").setup()
+    end,
+  },
+
+  -- Dashboard (スタートスクリーン)
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("dashboard").setup({
+        theme = "hyper",
+        config = {
+          header = {
+            "",
+            "███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗",
+            "████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║",
+            "██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║",
+            "██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║",
+            "██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║",
+            "╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝",
+            "",
+          },
+          shortcut = {
+            { desc = "  Find File",  group = "Label", action = "Telescope find_files", key = "f" },
+            { desc = "  Recent",     group = "Label", action = "Telescope oldfiles",   key = "r" },
+            { desc = "  Quit",       group = "Label", action = "qa",                   key = "q" },
+          },
+        },
+      })
+    end,
   },
 })
 

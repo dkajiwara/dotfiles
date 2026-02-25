@@ -5,6 +5,10 @@
     "BASH_MAX_TIMEOUT_MS": "600000",
     "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "true"
   },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
   "permissions": {
     "allow": [
       "Bash",
@@ -96,9 +100,8 @@
       }
     ]
   },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
-  "language": "japanese"
+  "language": "japanese",
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true
+  }
 }

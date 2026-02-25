@@ -24,6 +24,7 @@ vim.opt.expandtab = true
 -- ============================================================
 -- 補完候補をステータスメニューに表示
 vim.opt.wildmenu = true
+vim.opt.showcmd = false
 
 -- 空白文字を可視化
 vim.opt.list = true
@@ -43,7 +44,7 @@ vim.opt.splitbelow = true
 vim.opt.termguicolors = true
 
 -- カーソル形状 (全モードでブロックカーソル点滅 = vim と同じ動作)
-vim.opt.guicursor = "a:block-blinkon1"
+vim.opt.guicursor = "a:block-blinkwait700-blinkoff400-blinkon250"
 
 -- ============================================================
 -- Plugin Manager (lazy.nvim)

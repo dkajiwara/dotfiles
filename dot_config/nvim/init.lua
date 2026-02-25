@@ -94,9 +94,28 @@ require("lazy").setup({
     end,
     config = function()
       require("nvim-tree").setup({
+        on_attach = function(bufnr)
+          local api = require("nvim-tree.api")
+          -- デフォルトマッピングを維持
+          api.config.mappings.default_on_attach(bufnr)
+          -- l でファイルを開く / ディレクトリを展開
+          vim.keymap.set("n", "l", api.node.open.edit, { buffer = bufnr, silent = true })
+          -- h でディレクトリを閉じる
+          vim.keymap.set("n", "h", api.node.navigate.parent_close, { buffer = bufnr, silent = true })
+          -- Space でファイルをプレビュー（tree のフォーカスを維持）
+          vim.keymap.set("n", "<Space>", api.node.open.preview, { buffer = bufnr, silent = true })
+          -- Enter でタブで開く
+          vim.keymap.set("n", "<CR>", api.node.open.tab, { buffer = bufnr, silent = true })
+        end,
+        tab = {
+          sync = {
+            -- 新しいタブでも tree を自動で開く
+            open = true,
+            close = true,
+          },
+        },
         actions = {
           open_file = {
-            -- ファイルを開いた後サイドバーを閉じる場合は true に
             quit_on_open = false,
           },
         },

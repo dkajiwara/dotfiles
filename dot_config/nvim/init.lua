@@ -74,6 +74,41 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 -- ============================================================
 require("lazy").setup({
+  -- Auto pairs
+  {
+    "echasnovski/mini.pairs",
+    event = "InsertEnter",
+    config = function()
+      require("mini.pairs").setup()
+    end,
+  },
+
+  -- Better comments (Treesitter ベース)
+  {
+    "folke/ts-comments.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+
+  -- Treesitter (構文ハイライト・インデント)
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        ensure_installed = {
+          "lua", "vim", "vimdoc",
+          "bash", "json", "yaml", "toml",
+          "markdown", "markdown_inline",
+        },
+        auto_install = true,
+        highlight = { enable = true },
+        indent = { enable = true },
+      })
+    end,
+  },
+
   -- File tree (NERDTree → nvim-tree)
   {
     "nvim-tree/nvim-tree.lua",

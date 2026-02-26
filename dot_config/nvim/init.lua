@@ -30,6 +30,7 @@ vim.opt.showcmd = false
 vim.opt.list = true
 vim.opt.listchars = {
   tab = "»-",
+  space = "·",
   trail = "-",
   eol = "↲",
   extends = "»",

@@ -22,9 +22,22 @@ return {
     build = function()
       -- 初回インストール・更新時のみ実行
       require("nvim-treesitter").install({
-        "lua", "vim", "vimdoc",
-        "bash", "json", "yaml", "toml",
+        -- Flutter / Dart
+        "dart",
+        -- モバイル (iOS / Android)
+        "swift", "kotlin", "java",
+        -- 設定・データ
+        "json", "yaml", "toml", "xml",
+        -- CI / Fastlane
+        "bash", "ruby",
+        -- Flutter Web
+        "javascript", "typescript", "html", "css",
+        -- システム言語
+        "go", "rust",
+        -- マークアップ
         "markdown", "markdown_inline",
+        -- エディタ設定
+        "lua", "vim", "vimdoc",
       }):wait(300000)
     end,
     config = function()

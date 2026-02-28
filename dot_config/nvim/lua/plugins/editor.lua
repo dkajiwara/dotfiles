@@ -35,7 +35,7 @@ return {
         end,
         tab = {
           sync = {
-            open = false,
+            open = true,
             close = true,
           },
         },

@@ -17,6 +17,9 @@ quick-terminal-position=center
 quick-terminal-screen=main
 
 
+# Option キーを Meta として tmux に送信（M-0〜M-4 などのキーバインドに必要）
+macos-option-as-alt = left
+
 ## Keybinds
 keybind = shift+enter=text:\n
 keybind = "global:cmd+shift+t=toggle_quick_terminal"

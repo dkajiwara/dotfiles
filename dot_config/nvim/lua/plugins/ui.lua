@@ -36,6 +36,13 @@ return {
     end,
   },
 
+  -- Breadcrumbs (ファイルパス・関数名をウィンドウ上部に表示)
+  {
+    "Bekaboo/dropbar.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "BufReadPost",
+  },
+
   -- Colorscheme
   {
     "rebelot/kanagawa.nvim",

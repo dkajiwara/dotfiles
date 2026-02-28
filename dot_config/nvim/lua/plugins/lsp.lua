@@ -27,6 +27,13 @@ return {
       })
       require("mason-lspconfig").setup({
         ensure_installed = { "lua_ls" },
+        handlers = {
+          function(server_name)
+            require("lspconfig")[server_name].setup({
+              capabilities = require("blink.cmp").get_lsp_capabilities(),
+            })
+          end,
+        },
       })
     end,
   },

@@ -35,8 +35,7 @@ return {
         end,
         tab = {
           sync = {
-            -- 新しいタブでも tree を自動で開く
-            open = true,
+            open = false,
             close = true,
           },
         },

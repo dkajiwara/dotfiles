@@ -51,3 +51,13 @@ vim.opt.guicursor = "a:block-blinkwait700-blinkoff400-blinkon250"
 
 -- gitsigns 用
 vim.opt.updatetime = 100
+
+-- 外部でファイルが変更された時に自動リロード
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+  callback = function()
+    if vim.fn.mode() ~= "c" then
+      vim.cmd("checktime")
+    end
+  end,
+})

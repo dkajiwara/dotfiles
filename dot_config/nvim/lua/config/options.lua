@@ -1,3 +1,7 @@
+-- leader キーをスペースに設定（プラグイン読み込み前に設定する必要あり）
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- nvim-tree 用に netrw を無効化
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1

@@ -93,7 +93,7 @@ return {
           theme = "kanagawa",
           globalstatus = true,
           section_separators = { left = "", right = "" },
-          component_separators = { left = "", right = "" },
+          component_separators = { left = "\ue0b1", right = "\ue0b3" },
         },
         sections = {
           lualine_a = { "mode" },

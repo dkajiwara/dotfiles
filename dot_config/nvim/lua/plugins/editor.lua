@@ -46,6 +46,9 @@ return {
             quit_on_open = false,
           },
         },
+        renderer = {
+          special_files = {},
+        },
       })
       -- エディタ側を :q した時、nvim-tree だけ残っていたら自動で閉じる
       vim.api.nvim_create_autocmd("QuitPre", {

@@ -30,8 +30,8 @@ return {
           vim.keymap.set("n", "h", api.node.navigate.parent_close, { buffer = bufnr, silent = true })
           -- Space でファイルをプレビュー（tree のフォーカスを維持）
           vim.keymap.set("n", "<Space>", api.node.open.preview, { buffer = bufnr, silent = true })
-          -- Enter でタブで開く
-          vim.keymap.set("n", "<CR>", api.node.open.tab, { buffer = bufnr, silent = true })
+          -- Enter で現在のウィンドウで開く（タブで開く場合は <C-t>）
+          vim.keymap.set("n", "<CR>", api.node.open.edit, { buffer = bufnr, silent = true })
         end,
         tab = {
           sync = {

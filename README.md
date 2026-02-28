@@ -51,6 +51,19 @@ chezmoi apply
 - **rg (ripgrep)** - 高速テキスト検索
 - **bat** - syntax highlighting 付き cat
 
+### エディタ
+
+- **Neovim** (v0.11+, mise 管理) - テキストエディタ
+  - Kanagawa テーマ
+  - bufferline.nvim - バッファをタブ表示
+  - nvim-tree - ファイルツリー
+  - dropbar.nvim - パンくずリスト（ファイルパス・関数名）
+  - telescope.nvim - ファジーファインダー
+  - lualine.nvim - ステータスライン
+  - Treesitter - 構文ハイライト
+  - Mason + nvim-lspconfig - LSP（lua_ls）
+  - dashboard-nvim - スタートスクリーン
+
 ### AI アシスタント
 - **Claude Code** - Anthropic の CLI アシスタント
   - tmux popup でセッション永続化
@@ -76,6 +89,13 @@ chezmoi apply
 - `.local/bin/tmux-session-picker` - tmux セッション選択スクリプト
 - `.claude/settings.json` - Claude Code 設定
 - `.claude/scripts/notify.sh` - Claude Code 通知スクリプト（OSC 9）
+- `.config/nvim/init.lua` - Neovim エントリーポイント
+- `.config/nvim/lua/config/options.lua` - Neovim 基本設定
+- `.config/nvim/lua/config/keymaps.lua` - グローバルキーバインド
+- `.config/nvim/lua/plugins/ui.lua` - UI プラグイン（bufferline, dropbar, lualine 等）
+- `.config/nvim/lua/plugins/editor.lua` - エディタプラグイン（nvim-tree, telescope 等）
+- `.config/nvim/lua/plugins/coding.lua` - コーディングプラグイン（treesitter, mini.pairs 等）
+- `.config/nvim/lua/plugins/lsp.lua` - LSP 設定（Mason, nvim-lspconfig）
 
 ## キーバインド
 
@@ -92,6 +112,57 @@ chezmoi apply
 | `prefix + m` | man ページを popup で表示 |
 | `prefix + y` | Claude Code を popup で起動（セッション永続化） |
 | `prefix + Y` | Claude Code セッションを終了 |
+
+### Neovim
+
+`<leader>` キー = `Space`
+
+#### ファイル操作
+
+| キー | 機能 |
+|------|------|
+| `<C-n>` | ファイルツリー 表示/非表示 |
+| `<CR>` / `l` | ファイルを現在ウィンドウで開く |
+| `<Space>` | ファイルをプレビュー（tree フォーカス維持） |
+| `h` | ディレクトリを閉じる |
+
+#### バッファ管理（bufferline）
+
+| キー | 機能 |
+|------|------|
+| `<Tab>` | 次のバッファへ |
+| `<S-Tab>` | 前のバッファへ |
+| `<leader>bd` | 現在のバッファを閉じる |
+
+#### パンくずリスト（dropbar）
+
+| キー | 機能 |
+|------|------|
+| `<leader>;` | ドロップダウンでシンボル選択 |
+| `[;` | 現在のコンテキストの先頭へ |
+| `];` | 次のコンテキストへ |
+
+#### Telescope（ファジーファインダー）
+
+| キー | 機能 |
+|------|------|
+| `<leader>ff` | ファイル検索 |
+| `<leader>fr` | 最近開いたファイル |
+| `<leader>fg` | テキスト全文検索（Live Grep） |
+
+#### その他
+
+| キー | 機能 |
+|------|------|
+| `jj` | Insert → Normal モード |
+
+### tmux ペイン操作
+
+| キー | 機能 |
+|------|------|
+| `Option + 0〜4` | ペイン番号でジャンプ（prefix なし） |
+| `prefix + h/j/k/l` | Vim ライクなペイン移動 |
+| `prefix + H/J/K/L` | ペインリサイズ |
 
 ### zsh エイリアス
 

@@ -42,6 +42,11 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "BufReadPost",
     config = function()
+      require("dropbar").setup({
+        menu = {
+          preview = false,
+        },
+      })
       local dropbar_api = require("dropbar.api")
       vim.keymap.set("n", "<leader>;", dropbar_api.pick, { desc = "Pick symbols in winbar" })
       vim.keymap.set("n", "[;", dropbar_api.goto_context_start, { desc = "Go to start of current context" })

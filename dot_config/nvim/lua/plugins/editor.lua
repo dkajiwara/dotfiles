@@ -28,8 +28,9 @@ return {
           vim.keymap.set("n", "l", api.node.open.edit, { buffer = bufnr, silent = true })
           -- h でディレクトリを閉じる
           vim.keymap.set("n", "h", api.node.navigate.parent_close, { buffer = bufnr, silent = true })
-          -- Space でファイルをプレビュー（tree のフォーカスを維持）
-          vim.keymap.set("n", "<Space>", api.node.open.preview, { buffer = bufnr, silent = true })
+          -- P でファイルをプレビュー（tree のフォーカスを維持）
+          -- <Space> は leader キーと競合するため P に変更
+          vim.keymap.set("n", "P", api.node.open.preview, { buffer = bufnr, silent = true })
           -- Enter で現在のウィンドウで開く
           vim.keymap.set("n", "<CR>", api.node.open.edit, { buffer = bufnr, silent = true })
           -- <C-t> を無効化（bufferline でバッファ管理するため）

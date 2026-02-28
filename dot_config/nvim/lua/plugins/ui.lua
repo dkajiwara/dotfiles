@@ -54,6 +54,21 @@ return {
     end,
   },
 
+  -- Scrollbar (スクロールバー + Git/診断情報表示)
+  {
+    "petertriho/nvim-scrollbar",
+    event = "BufReadPost",
+    config = function()
+      require("scrollbar").setup({
+        handlers = {
+          gitsigns = true,
+          diagnostic = true,
+        },
+      })
+      require("scrollbar.handlers.gitsigns").setup()
+    end,
+  },
+
   -- Colorscheme
   {
     "rebelot/kanagawa.nvim",

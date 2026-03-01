@@ -84,10 +84,6 @@ return {
     priority = 1000,
     config = function()
       vim.cmd.colorscheme("kanagawa")
-      -- 背景透過
-      vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
-      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
-      vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
     end,
   },
 

@@ -54,6 +54,14 @@ return {
     end,
   },
 
+  -- Cmdline UI (blink.cmp の ghost text に必要)
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    opts = {},
+  },
+
   -- Scrollbar (スクロールバー + Git/診断情報表示)
   {
     "petertriho/nvim-scrollbar",

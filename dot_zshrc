@@ -96,3 +96,8 @@ eval "$(starship init zsh)"
 ## Completion scripts setup. Remove the following line to uninstall
 [[ -f /Users/dkajiii/.dart-cli-completion/zsh-config.zsh ]] && . /Users/dkajiii/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
+
+# ============================================================
+# Local overrides (machine-specific, not managed by chezmoi)
+# ============================================================
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

@@ -119,11 +119,30 @@ return {
     end,
   },
 
-  -- Markdown preview
+  -- Markdown preview (Neovim 内 splitview)
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = "cd app && npx --yes yarn install",
+    "OXY2DEV/markview.nvim",
+    lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      preview = {
+        filetypes = { "markdown" },
+        modes = { "n", "no", "c" },
+        splitview_winopts = { split = "right" },
+        callbacks = {
+          on_attach = function(buf, _)
+            vim.schedule(function()
+              if vim.api.nvim_buf_is_valid(buf) then
+                require("markview.actions").splitOpen(buf)
+              end
+            end)
+          end,
+        },
+      },
+    },
+    keys = {
+      { "<leader>ms", "<cmd>Markview splitToggle<cr>", desc = "Markview: splitview toggle" },
+      { "<leader>mt", "<cmd>Markview toggle<cr>", desc = "Markview: preview toggle" },
+    },
   },
 }

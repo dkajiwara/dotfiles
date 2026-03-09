@@ -103,13 +103,14 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
     "skill-creator@claude-plugins-official": true,
     "figma@claude-plugins-official": true
   },
   "language": "japanese",
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  }
+  "model": "sonnet"
 }

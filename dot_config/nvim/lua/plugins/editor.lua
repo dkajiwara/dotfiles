@@ -91,6 +91,9 @@ return {
             i = {
               ["<C-j>"] = "move_selection_next",
               ["<C-k>"] = "move_selection_previous",
+              ["<C-q>"] = function(...)
+                require("trouble.sources.telescope").open(...)
+              end,
             },
           },
         },
@@ -119,30 +122,32 @@ return {
     end,
   },
 
-  -- Markdown preview (Neovim 内 splitview)
+  -- QuickFix の代替（左一覧 + 右プレビュー）
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = "Trouble",
+    keys = {
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+      { "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "QuickFix (Trouble)" },
+    },
+    opts = {
+      preview = {
+        type = "split",
+        relative = "win",
+        position = "right",
+        size = 0.5,
+      },
+    },
+  },
+
+  -- Markdown preview (インラインレンダリング)
   {
     "OXY2DEV/markview.nvim",
     lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = {
-      preview = {
-        filetypes = { "markdown" },
-        modes = { "n", "no", "c" },
-        splitview_winopts = { split = "right" },
-        callbacks = {
-          on_attach = function(buf, _)
-            vim.schedule(function()
-              if vim.api.nvim_buf_is_valid(buf) then
-                require("markview.actions").splitOpen(buf)
-              end
-            end)
-          end,
-        },
-      },
-    },
     keys = {
-      { "<leader>ms", "<cmd>Markview splitToggle<cr>", desc = "Markview: splitview toggle" },
-      { "<leader>mt", "<cmd>Markview toggle<cr>", desc = "Markview: preview toggle" },
+      { "<leader>ms", "<cmd>Markview toggle<cr>", desc = "Markview: toggle rendering" },
     },
   },
 }

@@ -88,6 +88,24 @@ alias gc='ghq-cd'
 alias gg='ghq get'
 
 # ============================================================
+# git worktree
+# ============================================================
+# git worktree を fzf で選択して cd
+wt() {
+  local root=$(git worktree list --porcelain 2>/dev/null | awk '/^worktree/ {print $2}' | head -1)
+  if [ -z "$root" ]; then
+    echo "git worktree: not a git repository"
+    return 1
+  fi
+  local worktree=$(git worktree list 2>/dev/null \
+    | fzf --preview 'git -C $(echo {} | awk "{print \$1}") log --oneline -10' \
+          --preview-window=right:60%)
+  if [ -n "$worktree" ]; then
+    cd "$(echo "$worktree" | awk '{print $1}')"
+  fi
+}
+
+# ============================================================
 # Prompt
 # ============================================================
 eval "$(starship init zsh)"

@@ -100,7 +100,7 @@ wt() {
   local worktree=$(git worktree list 2>/dev/null \
     | fzf --ansi \
           --preview 'dir=$(echo {} | cut -d" " -f1); git -C "$dir" log -10 --color=always --pretty=format:"%C(bold #E6C384)%h%C(reset) %C(bold #7AA89F)%d%C(reset)%n  %C(#DCD7BA)%s%C(reset)%n  %C(#98BB6C)%an%C(reset) %C(#7E9CD8)%cr%C(reset)%n"' \
-          --preview-window=right:60%)
+          --preview-window=right:40%)
   if [ -n "$worktree" ]; then
     cd "$(echo "$worktree" | cut -d" " -f1)"
   fi

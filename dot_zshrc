@@ -107,10 +107,14 @@ alias gg='ghq get'
 # herdr / リモート Claude Code
 # ============================================================
 # macmini2.local に SSH 接続し、指定ディレクトリで Claude Code を起動
-# herdr が SSH 越しでも agent として認識できるよう HERDR_AGENT を付与
+# HERDR_AGENT は macOS の herdr では未対応 (Linux の /proc 依存実装のみ) で効かないため、
+# 自分のペイン ID (HERDR_PANE_ID) を使って herdr pane report-agent で明示的に agent 登録する
 cmini2() {
   local dir="${1:-~}"
-  HERDR_AGENT=claude ssh macmini2.local -t "zsh -lic \"cd $dir && claude\""
+  local pane="$HERDR_PANE_ID"
+  [ -n "$pane" ] && herdr pane report-agent "$pane" --source cmini2 --agent claude --state working
+  ssh macmini2.local -t "zsh -lic \"cd $dir && claude\""
+  [ -n "$pane" ] && herdr pane release-agent "$pane" --source cmini2 --agent claude
 }
 
 # ============================================================

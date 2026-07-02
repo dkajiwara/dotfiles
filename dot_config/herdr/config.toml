@@ -2,6 +2,10 @@ onboarding = false
 
 [theme]
 name = "kanagawa"
+
+[experimental]
+# herdr ペイン内から herdr --remote を起動できるようにする
+allow_nested = true
 [ui]
 agent_panel_sort = "spaces"
 

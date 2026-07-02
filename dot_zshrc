@@ -104,6 +104,16 @@ alias gc='ghq-cd'
 alias gg='ghq get'
 
 # ============================================================
+# herdr / リモート Claude Code
+# ============================================================
+# macmini2.local に SSH 接続し、指定ディレクトリで Claude Code を起動
+# herdr が SSH 越しでも agent として認識できるよう HERDR_AGENT を付与
+cmini2() {
+  local dir="${1:-~}"
+  HERDR_AGENT=claude ssh macmini2.local -t "zsh -lic \"cd $dir && claude\""
+}
+
+# ============================================================
 # git worktree
 # ============================================================
 # git worktree を fzf で選択して cd

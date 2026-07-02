@@ -9,3 +9,7 @@ agent_panel_sort = "spaces"
 prefix = "ctrl+a"
 split_horizontal = 'prefix+"'
 split_vertical = 'prefix+%'
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+navigate_pane_up = "ctrl+k"
+navigate_pane_down = "ctrl+j"

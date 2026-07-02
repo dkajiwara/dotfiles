@@ -108,13 +108,36 @@ alias gg='ghq get'
 # ============================================================
 # macmini2.local に SSH 接続し、指定ディレクトリで Claude Code を起動
 # HERDR_AGENT は macOS の herdr では未対応 (Linux の /proc 依存実装のみ) で効かないため、
-# 自分のペイン ID (HERDR_PANE_ID) を使って herdr pane report-agent で明示的に agent 登録する
+# 自分のペイン ID (HERDR_PANE_ID) を使って herdr pane report-agent で明示的に agent 登録する。
+# 状態は一度登録するだけでは追従しないため、画面内容を herdr agent explain で判定し
+# バックグラウンドで定期的に report-agent し直す
 cmini2() {
   local dir="${1:-~}"
   local pane="$HERDR_PANE_ID"
-  [ -n "$pane" ] && herdr pane report-agent "$pane" --source cmini2 --agent claude --state working
+  local poll_pid=
+
+  if [ -n "$pane" ]; then
+    herdr pane report-agent "$pane" --source cmini2 --agent claude --state working
+    (
+      while true; do
+        sleep 2
+        local screen state
+        screen=$(mktemp)
+        herdr pane read "$pane" --source recent --lines 40 --format text >"$screen" 2>/dev/null
+        state=$(herdr agent explain --file "$screen" --agent claude --json 2>/dev/null | jq -r '.state // empty')
+        rm -f "$screen"
+        [ -n "$state" ] && herdr pane report-agent "$pane" --source cmini2 --agent claude --state "$state"
+      done
+    ) &
+    poll_pid=$!
+  fi
+
   ssh macmini2.local -t "zsh -lic \"cd $dir && claude\""
-  [ -n "$pane" ] && herdr pane release-agent "$pane" --source cmini2 --agent claude
+
+  if [ -n "$pane" ]; then
+    kill "$poll_pid" 2>/dev/null
+    herdr pane release-agent "$pane" --source cmini2 --agent claude
+  fi
 }
 
 # ============================================================

@@ -7,3 +7,5 @@ agent_panel_sort = "spaces"
 
 [keys]
 prefix = "ctrl+a"
+split_horizontal = 'prefix+"'
+split_vertical = 'prefix+%'

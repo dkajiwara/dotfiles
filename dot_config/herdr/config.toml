@@ -1,4 +1,7 @@
 onboarding = false
+
+[theme]
+name = "kanagawa"
 [ui]
 agent_panel_sort = "spaces"
 

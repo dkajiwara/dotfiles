@@ -68,6 +68,11 @@ chezmoi apply
 - **Claude Code** - Anthropic の CLI アシスタント
   - tmux popup でセッション永続化
   - OSC 9 デスクトップ通知（Ghostty 連携）
+  - カスタム statusLine（`~/.claude/statusline-command.sh`）
+- **Cursor Agent CLI** - Cursor のターミナル Agent（`agent` コマンド）
+  - カスタム statusLine（`~/.cursor/statusline.sh`）
+  - 設定は `~/.config/cursor/cli-config.json`（`XDG_CONFIG_HOME` 経由）
+  - `statusLine` のみ chezmoi が `run_onchange` でマージ（認証・モデル等は CLI が管理）
 
 ### その他のツール
 - **ticker** - 株価・仮想通貨価格の TUI モニター
@@ -88,7 +93,9 @@ chezmoi apply
 - `.stCommitMsg` - Git コミットテンプレート
 - `.local/bin/tmux-session-picker` - tmux セッション選択スクリプト
 - `.claude/settings.json` - Claude Code 設定
+- `.claude/statusline-command.sh` - Claude Code statusLine スクリプト
 - `.claude/scripts/notify.sh` - Claude Code 通知スクリプト（OSC 9）
+- `.cursor/statusline.sh` - Cursor Agent CLI statusLine スクリプト
 - `.config/nvim/init.lua` - Neovim エントリーポイント
 - `.config/nvim/lua/config/options.lua` - Neovim 基本設定
 - `.config/nvim/lua/config/keymaps.lua` - グローバルキーバインド

@@ -1,0 +1,22 @@
+#!/bin/bash
+# Merge Cursor Agent CLI statusLine into the live cli-config.json.
+# Cursor manages most of this file; only statusLine is controlled by chezmoi.
+
+set -euo pipefail
+
+config="${XDG_CONFIG_HOME:-{{ .chezmoi.homeDir }}/.config}/cursor/cli-config.json"
+command="bash {{ .chezmoi.homeDir }}/.cursor/statusline.sh"
+
+mkdir -p "$(dirname "$config")"
+
+if [[ ! -f "$config" ]]; then
+  printf '%s\n' '{"version":1,"editor":{"vimMode":false},"permissions":{"allow":[],"deny":[]}}' >"$config"
+fi
+
+tmp="$(mktemp)"
+jq --arg cmd "$command" '.statusLine = {
+  "type": "command",
+  "command": $cmd,
+  "padding": 2
+}' "$config" >"$tmp"
+mv "$tmp" "$config"

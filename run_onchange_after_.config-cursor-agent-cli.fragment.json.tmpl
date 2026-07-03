@@ -17,6 +17,8 @@ tmp="$(mktemp)"
 jq --slurpfile frag "$fragment" --arg cmd "/bin/bash ${statusline}" '
   .statusLine = {"type": "command", "command": $cmd} |
   .permissions.allow = $frag[0].permissions.allow |
-  .permissions.deny = $frag[0].permissions.deny
+  .permissions.deny = $frag[0].permissions.deny |
+  .notifications = $frag[0].notifications |
+  .attribution = $frag[0].attribution
 ' "$config" >"$tmp"
 mv "$tmp" "$config"

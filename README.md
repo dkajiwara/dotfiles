@@ -70,9 +70,11 @@ chezmoi apply
   - OSC 9 デスクトップ通知（Ghostty 連携）
   - カスタム statusLine（`~/.claude/statusline-command.sh`）
 - **Cursor Agent CLI** - Cursor のターミナル Agent（`agent` コマンド）
-  - Claude Code と同じ statusLine・permissions 方針（`agent-cli.fragment.json` を chezmoi がマージ）
-  - statusLine コマンドは Cursor CLI の制約上 `bash` + 絶対パス（Claude の `bash ~/.claude/...` とは異なる）
-  - 設定ファイル: `~/.config/cursor/cli-config.json`（`XDG_CONFIG_HOME` 経由）
+  - Claude Code から**コピー**した設定（Claude 側は変更しない）
+  - MCP: `~/.cursor/mcp.json`（`~/.claude/.mcp.json` と同内容）
+  - Hooks: `~/.cursor/hooks.json`（Claude の Stop 通知相当）
+  - CLI 設定: `~/.config/cursor/cli-config.json`（permissions / statusLine / notifications 等）
+  - 確認待ち通知は Cursor の `notifications: true` が担当（Claude の permission_prompt hook 相当）
 
 ### その他のツール
 - **ticker** - 株価・仮想通貨価格の TUI モニター
@@ -96,7 +98,10 @@ chezmoi apply
 - `.claude/statusline-command.sh` - Claude Code statusLine スクリプト
 - `.claude/scripts/notify.sh` - Claude Code 通知スクリプト（OSC 9）
 - `.cursor/statusline-command.sh` - Cursor Agent CLI statusLine スクリプト（Claude Code と同一）
-- `.config/cursor/agent-cli.fragment.json` - Cursor Agent CLI の statusLine / permissions（chezmoi 管理）
+- `.cursor/mcp.json` - Cursor Agent CLI MCP 設定（Claude の `.mcp.json` コピー）
+- `.cursor/hooks.json` - Cursor Agent CLI hooks（Claude の Stop 通知相当）
+- `.cursor/scripts/notify.sh` - Cursor Agent CLI 通知スクリプト（Claude と同一ロジック）
+- `.config/cursor/agent-cli.fragment.json` - Cursor Agent CLI の permissions / notifications 等
 - `.config/nvim/init.lua` - Neovim エントリーポイント
 - `.config/nvim/lua/config/options.lua` - Neovim 基本設定
 - `.config/nvim/lua/config/keymaps.lua` - グローバルキーバインド

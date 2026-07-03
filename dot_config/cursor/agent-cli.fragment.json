@@ -54,5 +54,10 @@
       "Write(**/*.key)",
       "Write(**/.env*)"
     ]
+  },
+  "notifications": true,
+  "attribution": {
+    "attributeCommitsToAgent": false,
+    "attributePRsToAgent": false
   }
 }

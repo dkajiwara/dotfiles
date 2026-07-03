@@ -1,0 +1,62 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.cursor/statusline-command.sh"
+  },
+  "permissions": {
+    "allow": [
+      "Shell(*)",
+      "Read(**)",
+      "Write(**)",
+      "WebFetch(*)",
+      "Mcp(*:*)"
+    ],
+    "deny": [
+      "Shell(rm)",
+      "Shell(sudo)",
+      "Shell(dd)",
+      "Shell(mkfs)",
+      "Shell(chmod)",
+      "Shell(chown)",
+      "Shell(git:checkout .*)",
+      "Shell(git:checkout -- *)",
+      "Shell(git:config)",
+      "Shell(git:rebase -i*)",
+      "Shell(git:reset --hard*)",
+      "Shell(git:restore*)",
+      "Shell(git:push --force*)",
+      "Shell(git:push -f*)",
+      "Shell(pip:install*)",
+      "Shell(npm:install -g*)",
+      "Shell(gem:install*)",
+      "Shell(bundle:install*)",
+      "Shell(gh:repo delete*)",
+      "Shell(gh:repo create*)",
+      "Shell(gh:repo fork*)",
+      "Shell(gh:repo edit*)",
+      "Shell(gh:repo rename*)",
+      "Shell(gh:repo archive*)",
+      "Shell(gh:repo unarchive*)",
+      "Shell(gh:repo deploy-key*)",
+      "Shell(gh:release create*)",
+      "Shell(gh:release delete*)",
+      "Shell(gh:release upload*)",
+      "Shell(gh:gist create*)",
+      "Shell(gh:gist delete*)",
+      "Shell(gh:secret set*)",
+      "Shell(gh:secret delete*)",
+      "Shell(gh:ssh-key add*)",
+      "Shell(gh:ssh-key delete*)",
+      "Shell(gh:gpg-key add*)",
+      "Shell(gh:gpg-key delete*)",
+      "Shell(gh:auth logout*)",
+      "Shell(gh:auth refresh*)",
+      "Shell(gh:api --method DELETE*)",
+      "Shell(gh:workflow disable*)",
+      "Shell(gh:workflow enable*)",
+      "Shell(gh:workflow run*)",
+      "Write(**/*.key)",
+      "Write(**/.env*)"
+    ]
+  }
+}

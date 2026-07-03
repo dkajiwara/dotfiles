@@ -70,9 +70,8 @@ chezmoi apply
   - OSC 9 デスクトップ通知（Ghostty 連携）
   - カスタム statusLine（`~/.claude/statusline-command.sh`）
 - **Cursor Agent CLI** - Cursor のターミナル Agent（`agent` コマンド）
-  - カスタム statusLine（`~/.cursor/statusline.sh`）
-  - 設定は `~/.config/cursor/cli-config.json`（`XDG_CONFIG_HOME` 経由）
-  - `statusLine` のみ chezmoi が `run_onchange` でマージ（認証・モデル等は CLI が管理）
+  - Claude Code と同じ statusLine・permissions 方針（`agent-cli.fragment.json` を chezmoi がマージ）
+  - 設定ファイル: `~/.config/cursor/cli-config.json`（`XDG_CONFIG_HOME` 経由）
 
 ### その他のツール
 - **ticker** - 株価・仮想通貨価格の TUI モニター
@@ -95,7 +94,8 @@ chezmoi apply
 - `.claude/settings.json` - Claude Code 設定
 - `.claude/statusline-command.sh` - Claude Code statusLine スクリプト
 - `.claude/scripts/notify.sh` - Claude Code 通知スクリプト（OSC 9）
-- `.cursor/statusline.sh` - Cursor Agent CLI statusLine スクリプト
+- `.cursor/statusline-command.sh` - Cursor Agent CLI statusLine スクリプト（Claude Code と同一）
+- `.config/cursor/agent-cli.fragment.json` - Cursor Agent CLI の statusLine / permissions（chezmoi 管理）
 - `.config/nvim/init.lua` - Neovim エントリーポイント
 - `.config/nvim/lua/config/options.lua` - Neovim 基本設定
 - `.config/nvim/lua/config/keymaps.lua` - グローバルキーバインド

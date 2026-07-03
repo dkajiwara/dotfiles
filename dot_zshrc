@@ -104,6 +104,19 @@ alias gc='ghq-cd'
 alias gg='ghq get'
 
 # ============================================================
+# Cursor Agent CLI
+# ============================================================
+# claude -c 相当: agent -c -> agent --continue
+agent() {
+  if [[ "$1" == "-c" ]]; then
+    shift
+    command agent --continue "$@"
+  else
+    command agent "$@"
+  fi
+}
+
+# ============================================================
 # herdr / リモート Claude Code
 # ============================================================
 # macmini2.local に SSH 接続し、指定ディレクトリで Claude Code を起動

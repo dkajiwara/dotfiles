@@ -5,6 +5,7 @@ set -euo pipefail
 
 config="${XDG_CONFIG_HOME:-{{ .chezmoi.homeDir }}/.config}/cursor/cli-config.json"
 fragment="{{ .chezmoi.sourceDir }}/dot_config/cursor/agent-cli.fragment.json"
+statusline="{{ .chezmoi.homeDir }}/.cursor/statusline-command.sh"
 
 mkdir -p "$(dirname "$config")"
 
@@ -13,8 +14,8 @@ if [[ ! -f "$config" ]]; then
 fi
 
 tmp="$(mktemp)"
-jq --slurpfile frag "$fragment" '
-  .statusLine = $frag[0].statusLine |
+jq --slurpfile frag "$fragment" --arg cmd "/bin/bash ${statusline}" '
+  .statusLine = {"type": "command", "command": $cmd} |
   .permissions.allow = $frag[0].permissions.allow |
   .permissions.deny = $frag[0].permissions.deny
 ' "$config" >"$tmp"

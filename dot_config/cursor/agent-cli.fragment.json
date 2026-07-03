@@ -1,8 +1,4 @@
 {
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.cursor/statusline-command.sh"
-  },
   "permissions": {
     "allow": [
       "Shell(*)",

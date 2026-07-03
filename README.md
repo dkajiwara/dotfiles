@@ -71,6 +71,7 @@ chezmoi apply
   - カスタム statusLine（`~/.claude/statusline-command.sh`）
 - **Cursor Agent CLI** - Cursor のターミナル Agent（`agent` コマンド）
   - Claude Code と同じ statusLine・permissions 方針（`agent-cli.fragment.json` を chezmoi がマージ）
+  - statusLine コマンドは Cursor CLI の制約上 `bash` + 絶対パス（Claude の `bash ~/.claude/...` とは異なる）
   - 設定ファイル: `~/.config/cursor/cli-config.json`（`XDG_CONFIG_HOME` 経由）
 
 ### その他のツール

@@ -38,6 +38,7 @@ chezmoi apply
   - Kanagawa テーマ
   - prefix キー: `Ctrl + a`
   - Vim ライクなペイン移動（`Ctrl + h/j/k/l`）
+  - `[ui.toast]` (`delivery = "terminal"`) でバックグラウンドのエージェントが完了・入力待ちになったときに Ghostty (`desktop-notifications = true`) 経由でデスクトップ通知。SSH 越しの herdr セッションでも有効。herdr 管理外のターミナルでは通知は出ない
 
 ### バージョン管理・開発ツール
 - **mise** - 開発ツールのバージョン管理
@@ -70,14 +71,13 @@ chezmoi apply
 
 ### AI アシスタント
 - **Claude Code** - Anthropic の CLI アシスタント
-  - herdr でセッション永続化
+  - herdr でセッション永続化。完了・確認待ち通知は herdr の `[ui.toast]` が担当（Claude 側の Stop/Notification hook は使わない）
   - カスタム statusLine（`~/.claude/statusline-command.sh`）
 - **Cursor Agent CLI** - Cursor のターミナル Agent（`agent` コマンド）
   - Claude Code から**コピー**した設定（Claude 側は変更しない）
   - MCP: `~/.cursor/mcp.json`（`~/.claude/.mcp.json` と同内容）
-  - Hooks: `~/.cursor/hooks.json`（Claude の Stop 通知相当）
   - CLI 設定: `~/.config/cursor/cli-config.json`（permissions / statusLine / notifications 等）
-  - 確認待ち通知は Cursor の `notifications: true` が担当（Claude の permission_prompt hook 相当）
+  - herdr 管理下では完了・確認待ち通知は herdr の `[ui.toast]` が担当。加えて Cursor 自身の `notifications: true`（`cli-config.json`）も有効
 
 ### その他のツール
 - **ticker** - 株価・仮想通貨価格の TUI モニター
@@ -89,7 +89,7 @@ chezmoi apply
 - `.gitignore_global` - グローバル gitignore
 - `.vimrc` - Vim 設定
 - `.ideavimrc` - IntelliJ Vim 設定
-- `.config/herdr/config.toml` - herdr 設定（テーマ・キーバインド）
+- `.config/herdr/config.toml` - herdr 設定（テーマ・キーバインド・通知）
 - `.config/ghostty/config` - Ghostty ターミナル設定
 - `.config/starship.toml` - Starship 設定
 - `.config/sheldon/plugins.toml` - Sheldon プラグイン設定
@@ -98,11 +98,8 @@ chezmoi apply
 - `.stCommitMsg` - Git コミットテンプレート
 - `.claude/settings.json` - Claude Code 設定
 - `.claude/statusline-command.sh` - Claude Code statusLine スクリプト
-- `.claude/scripts/notify.sh` - Claude Code 通知スクリプト
 - `.cursor/statusline-command.sh` - Cursor Agent CLI statusLine スクリプト（Claude Code と同一）
 - `.cursor/mcp.json` - Cursor Agent CLI MCP 設定（Claude の `.mcp.json` コピー）
-- `.cursor/hooks.json` - Cursor Agent CLI hooks（Claude の Stop 通知相当）
-- `.cursor/scripts/notify.sh` - Cursor Agent CLI 通知スクリプト（Claude と同一ロジック）
 - `.config/cursor/agent-cli.fragment.json` - Cursor Agent CLI の permissions / notifications 等
 - `.config/nvim/init.lua` - Neovim エントリーポイント
 - `.config/nvim/lua/config/options.lua` - Neovim 基本設定

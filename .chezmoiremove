@@ -1,2 +1,5 @@
 .tmux.conf
 .local/bin/tmux-session-picker
+.claude/scripts/notify.sh
+.cursor/scripts/notify.sh
+.cursor/hooks.json

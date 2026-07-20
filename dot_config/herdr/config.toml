@@ -5,6 +5,10 @@ name = "kanagawa"
 [ui]
 agent_panel_sort = "spaces"
 
+[ui.toast]
+delivery = "terminal"
+delay_seconds = 1
+
 [keys]
 prefix = "ctrl+a"
 split_horizontal = 'prefix+"'

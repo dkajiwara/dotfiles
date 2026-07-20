@@ -1,0 +1,4 @@
+# Data files referenced by modify_/run_onchange_ scripts via {{ .chezmoi.sourceDir }} —
+# not meant to be deployed as standalone target files.
+.claude/settings.base.json
+.config/cursor/agent-cli.fragment.json

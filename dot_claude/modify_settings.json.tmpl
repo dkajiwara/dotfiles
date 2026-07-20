@@ -1,0 +1,19 @@
+#!/bin/bash
+# chezmoi passes the current ~/.claude/settings.json content on stdin;
+# stdout becomes the new content.
+#
+# Base content (everything chezmoi owns) lives in settings.base.json.
+# enabledPlugins / advisorModel are explicitly passed through as-is from the
+# live file, since Claude Code itself writes them via /config and plugin
+# management — everything else always comes from the base.
+
+set -euo pipefail
+
+base="{{ .chezmoi.sourceDir }}/dot_claude/settings.base.json"
+
+jq --slurp --slurpfile base "$base" '
+  ($base[0]) as $base |
+  (.[0] // {}) as $live |
+  ($base + {enabledPlugins: ($live.enabledPlugins // {}), advisorModel: $live.advisorModel}) |
+  if .advisorModel == null then del(.advisorModel) else . end
+'

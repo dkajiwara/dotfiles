@@ -15,6 +15,12 @@ chezmoi init https://github.com/yourusername/dotfiles.git
 chezmoi apply
 ```
 
+### `.claude/settings.json` の部分管理
+
+`.claude/settings.json` は chezmoi の [`modify_` スクリプト](https://www.chezmoi.io/reference/target-types/#modify_-scripts)（`dot_claude/modify_settings.json.tmpl`）で管理しています。管理したい内容そのものは `dot_claude/settings.base.json`（プレーンな JSON、`.chezmoiignore` 対象で単体では実体化しない）に書き、スクリプトは `chezmoi apply` のたびに現在の実機の内容を標準入力で受け取り、`enabledPlugins`・`advisorModel` の 2 つだけを実機の値のまま明示的に上書きして、それ以外は常に `settings.base.json` の内容にします。
+
+`enabledPlugins`・`advisorModel` は Claude Code 自身が `/config` やプラグイン管理から書き込むキーなので、素通りさせています。マシンごとの実行時の状態がそのまま保たれ、それ以外のキーが外部から変更された場合は `chezmoi diff`/`apply` でちゃんと検知されます（Cursor Agent CLI の `run_onchange` + `jq` と同じ発想ですが、`modify_` は対象ファイルの一部だけを管理する chezmoi の標準機構です）。
+
 ## 採用ツール
 
 ### ターミナル

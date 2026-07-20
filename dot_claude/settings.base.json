@@ -10,6 +10,7 @@
     "pr": ""
   },
   "permissions": {
+    "defaultMode": "auto",
     "allow": [
       "Bash",
       "Edit",
@@ -107,11 +108,6 @@
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
-  "enabledPlugins": {
-    "skill-creator@claude-plugins-official": true,
-    "figma@claude-plugins-official": true,
-    "swift-lsp@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true
-  },
-  "language": "japanese"
+  "language": "japanese",
+  "tui": "fullscreen"
 }

@@ -15,99 +15,56 @@ chezmoi init https://github.com/dkajiwara/dotfiles.git
 chezmoi apply
 ```
 
-### `.claude/settings.json` の部分管理
+## 管理方針
 
-`.claude/settings.json` は chezmoi の [`modify_` スクリプト](https://www.chezmoi.io/reference/target-types/#modify_-scripts)（`dot_claude/modify_settings.json.tmpl`）で管理しています。管理したい内容そのものは `dot_claude/settings.base.json`（プレーンな JSON、`.chezmoiignore` 対象で単体では実体化しない）に書き、スクリプトは `chezmoi apply` のたびに現在の実機の内容を標準入力で受け取り、`enabledPlugins`・`advisorModel` の 2 つだけを実機の値のまま明示的に上書きして、それ以外は常に `settings.base.json` の内容にします。
+### 部分管理する設定（Claude / Cursor）
 
-`enabledPlugins`・`advisorModel` は Claude Code 自身が `/config` やプラグイン管理から書き込むキーなので、素通りさせています。マシンごとの実行時の状態がそのまま保たれ、それ以外のキーが外部から変更された場合は `chezmoi diff`/`apply` でちゃんと検知されます。Cursor Agent CLI の `~/.config/cursor/cli-config.json`（`dot_config/cursor/modify_cli-config.json.tmpl`）も同じ `modify_` パターンで管理しています。以前は `run_onchange_` + `jq` でしたが、fragment だけを変更してもスクリプト本体のハッシュが変わらず再実行されない問題があったため `modify_` に統一しました。
+`~/.claude/settings.json` と `~/.config/cursor/cli-config.json` は、エージェント自身が実行時に書き込むキーがあるため、ファイル全体ではなく一部だけを [`modify_` スクリプト](https://www.chezmoi.io/reference/target-types/#modify_-scripts)で管理しています（`chezmoi apply` のたびに実機の内容を標準入力で受け取り、管理対象のキーだけを上書きして出力）。
 
-## 採用ツール
+- **Claude**: `enabledPlugins`・`advisorModel`（`/config` やプラグイン管理で書き換わる）は実機の値のまま素通りし、それ以外（`permissions`・`hooks`・`statusLine` 等）を管理
+- **Cursor**: `version`・`editor`（Cursor 自身が書き込む）は実機の値のまま素通りし、それ以外（`permissions`・`statusLine`・`notifications`・`attribution`）を管理
+- `modify_` を選んでいるのは、`chezmoi apply` のたびに実機の現在値とマージでき、管理対象キーの外部変更もきちんと検知されるため
 
-### ターミナル
-- **Ghostty** - 高速ターミナルエミュレータ
-- **Moralerspace Neon** - Nerd Fonts 対応フォント（日本語・英語混在に最適）
+## 管理対象
 
-### シェル・プロンプト
-- **Zsh** - シェル
-- **Starship** - プロンプト（ディレクトリフルパス表示）
-- **Sheldon** - Zsh プラグインマネージャー
-- **carapace** - マルチシェル対応補完システム
+### ターミナル・シェル
 
-### ターミナルワークスペースマネージャー
+- **Ghostty** - ターミナルエミュレータ（フォント: Moralerspace Neon）
+- **Zsh** + **Starship** + **Sheldon**（プラグイン管理）+ **carapace**（補完）
 - **herdr** - AI コーディングエージェント向けターミナルワークスペースマネージャー
-  - Kanagawa テーマ
-  - prefix キー: `Ctrl + a`
-  - Vim ライクなペイン移動（`Ctrl + h/j/k/l`）
-  - `[ui.toast]` (`delivery = "terminal"`) でバックグラウンドのエージェントが完了・入力待ちになったときに Ghostty (`desktop-notifications = true`) 経由でデスクトップ通知。SSH 越しの herdr セッションでも有効。herdr 管理外のターミナルでは通知は出ない
+  - Kanagawa テーマ、prefix キー `Ctrl + a`
+  - `[ui.toast]`（`delivery = "terminal"`）で、バックグラウンドのエージェントが完了・入力待ちになったときに Ghostty (`desktop-notifications = true`) 経由でデスクトップ通知。SSH 越しの herdr セッションでも有効。herdr 管理外のターミナルでは通知は出ない
+  - Claude Code・Cursor Agent CLI 側の完了・確認待ち通知はこの `[ui.toast]` が担当（各エージェント側の hook は使わない）
+- **mise** / **pyenv** / **tfenv** / **direnv** / **zoxide** - `.zshrc` で有効化（バージョン固定などの個別設定はこのリポジトリでは管理していない）
 
-### バージョン管理・開発ツール
-- **mise** - 開発ツールのバージョン管理
-- **pyenv** - Python バージョン管理
-- **tfenv** - Terraform バージョン管理
-- **direnv** - ディレクトリ単位の環境変数管理
+### Git・開発ツール
 
-### リポジトリ・ Git 管理
-- **ghq** - Git リポジトリ管理（`~/Documents/workspace` に統一管理）
-- **lazygit** - Git TUI
-
-### ファジーファインダー・検索
-- **fzf** - ファジーファインダー（Vim スタイルキーバインド）
-- **fd** - 高速ファイル検索
-- **rg (ripgrep)** - 高速テキスト検索
-- **bat** - syntax highlighting 付き cat
+- **ghq**（`~/Documents/workspace` に統一管理）+ **lazygit**（Git TUI）+ **tig**
+- **fzf**（ファジーファインダー）/ **fd** / **rg (ripgrep)** / **bat**
 
 ### エディタ
 
-- **Neovim** (v0.11+, mise 管理) - テキストエディタ
-  - Kanagawa テーマ
-  - bufferline.nvim - バッファをタブ表示
-  - nvim-tree - ファイルツリー
-  - dropbar.nvim - パンくずリスト（ファイルパス・関数名）
-  - telescope.nvim - ファジーファインダー
-  - lualine.nvim - ステータスライン
-  - Treesitter - 構文ハイライト
-  - Mason + nvim-lspconfig - LSP（lua_ls）
-  - dashboard-nvim - スタートスクリーン
+- **Neovim** - Mason + nvim-lspconfig（LSP: `lua_ls`, `ts_ls`）
+  - Kanagawa テーマ、bufferline.nvim、nvim-tree、dropbar.nvim、telescope.nvim、lualine.nvim、Treesitter、dashboard-nvim
 
-### AI アシスタント
-- **Claude Code** - Anthropic の CLI アシスタント
-  - herdr でセッション永続化。完了・確認待ち通知は herdr の `[ui.toast]` が担当（Claude 側の Stop/Notification hook は使わない）
-  - カスタム statusLine（`~/.claude/statusline-command.sh`）
-- **Cursor Agent CLI** - Cursor のターミナル Agent（`agent` コマンド）
-  - Claude Code から**コピー**した設定（Claude 側は変更しない）
-  - MCP: `~/.cursor/mcp.json`（Cursor 専用設定。`~/.claude/.mcp.json` は chezmoi 管理外の別リポジトリへのシンボリックリンクのため、手動でコピーした内容で自動追従はしない）
-  - CLI 設定: `~/.config/cursor/cli-config.json`（permissions / statusLine / notifications 等）
-  - herdr 管理下では完了・確認待ち通知は herdr の `[ui.toast]` が担当。加えて Cursor 自身の `notifications: true`（`cli-config.json`）も有効
+### AI エージェント
 
-### その他のツール
-- **ticker** - 株価・仮想通貨価格の TUI モニター
+- **Claude Code** - Anthropic の CLI アシスタント。herdr でセッション永続化、カスタム statusLine
+- **Cursor Agent CLI** - Cursor のターミナル Agent（`agent` コマンド）。Claude Code と同じ表示ロジックの statusLine、Cursor 専用の MCP 設定（`~/.claude/.mcp.json` は chezmoi 管理外の別リポジトリへのシンボリックリンクで、自動連携はない）
 
 ## 管理ファイル
 
-- `.zshrc` - Zsh 設定
-- `.gitconfig` - Git 設定（ghq root 設定含む）
-- `.gitignore_global` - グローバル gitignore
-- `.ideavimrc` - IntelliJ Vim 設定
-- `.config/herdr/config.toml` - herdr 設定（テーマ・キーバインド・通知）
-- `.config/ghostty/config` - Ghostty ターミナル設定
-- `.config/starship.toml` - Starship 設定
-- `.config/sheldon/plugins.toml` - Sheldon プラグイン設定
-- `.config/lazygit/config.yml` - lazygit 設定
-- `.stCommitMsg` - Git コミットテンプレート
-- `.claude/settings.json` - Claude Code 設定
-- `.claude/statusline-command.sh` - Claude Code statusLine スクリプト
-- `.cursor/statusline-command.sh` - Cursor Agent CLI statusLine スクリプト（Claude Code と同一）
-- `.cursor/mcp.json` - Cursor Agent CLI 専用の MCP 設定（Claude 側とは自動連携なし）
-- `.config/cursor/cli-config.json` - Cursor Agent CLI 設定（`modify_` で部分管理、`version`/`editor` は素通り）
-- `.config/nvim/init.lua` - Neovim エントリーポイント
-- `.config/nvim/lua/config/options.lua` - Neovim 基本設定
-- `.config/nvim/lua/config/keymaps.lua` - グローバルキーバインド
-- `.config/nvim/lua/plugins/ui.lua` - UI プラグイン（bufferline, dropbar, lualine 等）
-- `.config/nvim/lua/plugins/editor.lua` - エディタプラグイン（nvim-tree, telescope 等）
-- `.config/nvim/lua/plugins/coding.lua` - コーディングプラグイン（treesitter, mini.pairs 等）
-- `.config/nvim/lua/plugins/lsp.lua` - LSP 設定（Mason, nvim-lspconfig）
+主なディレクトリ単位の管理対象です。個別に注意が必要なもの（部分管理・シンボリックリンクなど）のみ個別記載しています。
 
-## キーバインド
+- `~/.zshrc`, `~/.gitconfig`, `~/.gitignore_global`, `~/.ideavimrc`, `~/.tigrc`, `~/.stCommitMsg`
+- `~/.config/herdr/`, `~/.config/ghostty/`, `~/.config/starship.toml`, `~/.config/sheldon/`, `~/.config/lazygit/`
+- `~/.config/nvim/` - Neovim 設定（init.lua、config/options・keymaps、plugins/ui・editor・coding・lsp・init）
+- `~/.claude/CLAUDE.md`, `~/.claude/statusline-command.sh`
+- `~/.claude/settings.json` - `modify_`（[管理方針](#部分管理する設定claude--cursor)参照）
+- `~/.cursor/statusline-command.sh`, `~/.cursor/mcp.json`
+- `~/.config/cursor/cli-config.json` - `modify_`（[管理方針](#部分管理する設定claude--cursor)参照）
+
+## キーバインド・コマンド
 
 ### herdr
 
@@ -117,6 +74,8 @@ chezmoi apply
 | `prefix + %` | 垂直分割 |
 | `prefix + k` / `prefix + j` | ワークスペース移動（上/下） |
 | `Ctrl + h/j/k/l` | ペイン移動（左/下/上/右） |
+| `prefix + g` | lazygit を popup で起動 |
+| `prefix + t` | scratch shell を popup で起動 |
 
 ### Neovim
 
@@ -161,12 +120,15 @@ chezmoi apply
 |------|------|
 | `jj` | Insert → Normal モード |
 
-### zsh エイリアス
+### zsh コマンド
 
 | コマンド | 機能 |
 |---------|------|
 | `gc` | ghq リポジトリを fzf で選択して cd |
 | `gg <URL>` | ghq get（リポジトリをクローン） |
+| `agent -c` | Cursor Agent CLI を `--continue` 付きで起動（`claude -c` 相当） |
+| `cmini2 [dir]` | macmini2.local に SSH 接続し、指定ディレクトリで Claude Code を起動（herdr へのエージェント状態報告付き） |
+| `wt` | git worktree を fzf で選択して cd |
 
 ### fzf
 

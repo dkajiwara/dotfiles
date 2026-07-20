@@ -9,7 +9,7 @@
 brew install chezmoi
 
 # dotfiles を取り込み
-chezmoi init https://github.com/yourusername/dotfiles.git
+chezmoi init https://github.com/dkajiwara/dotfiles.git
 
 # 設定を適用
 chezmoi apply
@@ -87,14 +87,12 @@ chezmoi apply
 - `.zshrc` - Zsh 設定
 - `.gitconfig` - Git 設定（ghq root 設定含む）
 - `.gitignore_global` - グローバル gitignore
-- `.vimrc` - Vim 設定
 - `.ideavimrc` - IntelliJ Vim 設定
 - `.config/herdr/config.toml` - herdr 設定（テーマ・キーバインド・通知）
 - `.config/ghostty/config` - Ghostty ターミナル設定
 - `.config/starship.toml` - Starship 設定
 - `.config/sheldon/plugins.toml` - Sheldon プラグイン設定
 - `.config/lazygit/config.yml` - lazygit 設定
-- `.ticker.yaml` - ticker 設定
 - `.stCommitMsg` - Git コミットテンプレート
 - `.claude/settings.json` - Claude Code 設定
 - `.claude/statusline-command.sh` - Claude Code statusLine スクリプト

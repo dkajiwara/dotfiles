@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
@@ -16,8 +19,8 @@ jobs:
       - name: Install chezmoi
         run: brew install chezmoi
 
-      - name: Initialize chezmoi
-        run: chezmoi init https://github.com/dkajiwara/dotfiles.git
-
       - name: Test chezmoi apply (dry-run)
-        run: chezmoi apply --dry-run --verbose
+        run: |
+          chezmoi apply --dry-run --verbose \
+            --source "$GITHUB_WORKSPACE" \
+            --destination "$(mktemp -d)"

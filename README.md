@@ -27,13 +27,11 @@ chezmoi apply
 - **Sheldon** - Zsh プラグインマネージャー
 - **carapace** - マルチシェル対応補完システム
 
-### ターミナルマルチプレクサ
-- **tmux** - ターミナルマルチプレクサ
-  - Kanagawa テーマ (Nybkox/tmux-kanagawa)
-  - TPM (Tmux Plugin Manager)
-  - CPU/RAM 使用率、時間表示
-  - Vim ライクなペイン選択
-  - Popup window 機能（lazygit、fzf、セッション選択、ghq 連携）
+### ターミナルワークスペースマネージャー
+- **herdr** - AI コーディングエージェント向けターミナルワークスペースマネージャー
+  - Kanagawa テーマ
+  - prefix キー: `Ctrl + a`
+  - Vim ライクなペイン移動（`Ctrl + h/j/k/l`）
 
 ### バージョン管理・開発ツール
 - **mise** - 開発ツールのバージョン管理
@@ -43,7 +41,7 @@ chezmoi apply
 
 ### リポジトリ・ Git 管理
 - **ghq** - Git リポジトリ管理（`~/Documents/workspace` に統一管理）
-- **lazygit** - Git TUI（tmux popup で起動可能）
+- **lazygit** - Git TUI
 
 ### ファジーファインダー・検索
 - **fzf** - ファジーファインダー（Vim スタイルキーバインド）
@@ -66,8 +64,7 @@ chezmoi apply
 
 ### AI アシスタント
 - **Claude Code** - Anthropic の CLI アシスタント
-  - tmux popup でセッション永続化
-  - OSC 9 デスクトップ通知（Ghostty 連携）
+  - herdr でセッション永続化
   - カスタム statusLine（`~/.claude/statusline-command.sh`）
 - **Cursor Agent CLI** - Cursor のターミナル Agent（`agent` コマンド）
   - Claude Code から**コピー**した設定（Claude 側は変更しない）
@@ -86,17 +83,16 @@ chezmoi apply
 - `.gitignore_global` - グローバル gitignore
 - `.vimrc` - Vim 設定
 - `.ideavimrc` - IntelliJ Vim 設定
-- `.tmux.conf` - tmux 設定（popup window キーバインド含む）
+- `.config/herdr/config.toml` - herdr 設定（テーマ・キーバインド）
 - `.config/ghostty/config` - Ghostty ターミナル設定
 - `.config/starship.toml` - Starship 設定
 - `.config/sheldon/plugins.toml` - Sheldon プラグイン設定
 - `.config/lazygit/config.yml` - lazygit 設定
 - `.ticker.yaml` - ticker 設定
 - `.stCommitMsg` - Git コミットテンプレート
-- `.local/bin/tmux-session-picker` - tmux セッション選択スクリプト
 - `.claude/settings.json` - Claude Code 設定
 - `.claude/statusline-command.sh` - Claude Code statusLine スクリプト
-- `.claude/scripts/notify.sh` - Claude Code 通知スクリプト（OSC 9）
+- `.claude/scripts/notify.sh` - Claude Code 通知スクリプト
 - `.cursor/statusline-command.sh` - Cursor Agent CLI statusLine スクリプト（Claude Code と同一）
 - `.cursor/mcp.json` - Cursor Agent CLI MCP 設定（Claude の `.mcp.json` コピー）
 - `.cursor/hooks.json` - Cursor Agent CLI hooks（Claude の Stop 通知相当）
@@ -112,19 +108,14 @@ chezmoi apply
 
 ## キーバインド
 
-### tmux popup window
+### herdr
 
 | キー | 機能 |
 |------|------|
-| `prefix + g` | lazygit を popup で起動 |
-| `prefix + f` | fzf でファイル検索・プレビュー |
-| `prefix + t` | popup シェル（セッション永続化、ログインシェル） |
-| `prefix + D` | popup セッションを削除 |
-| `prefix + s` | fzf でセッション選択（ペイン内容プレビュー付き） |
-| `prefix + p` | ghq リポジトリを選択して cd |
-| `prefix + m` | man ページを popup で表示 |
-| `prefix + y` | Claude Code を popup で起動（セッション永続化） |
-| `prefix + Y` | Claude Code セッションを終了 |
+| `prefix + "` | 水平分割 |
+| `prefix + %` | 垂直分割 |
+| `prefix + k` / `prefix + j` | ワークスペース移動（上/下） |
+| `Ctrl + h/j/k/l` | ペイン移動（左/下/上/右） |
 
 ### Neovim
 
@@ -168,14 +159,6 @@ chezmoi apply
 | キー | 機能 |
 |------|------|
 | `jj` | Insert → Normal モード |
-
-### tmux ペイン操作
-
-| キー | 機能 |
-|------|------|
-| `Option + 0〜4` | ペイン番号でジャンプ（prefix なし） |
-| `prefix + h/j/k/l` | Vim ライクなペイン移動 |
-| `prefix + H/J/K/L` | ペインリサイズ |
 
 ### zsh エイリアス
 

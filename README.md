@@ -75,7 +75,7 @@ chezmoi apply
   - カスタム statusLine（`~/.claude/statusline-command.sh`）
 - **Cursor Agent CLI** - Cursor のターミナル Agent（`agent` コマンド）
   - Claude Code から**コピー**した設定（Claude 側は変更しない）
-  - MCP: `~/.cursor/mcp.json`（`~/.claude/.mcp.json` と同内容）
+  - MCP: `~/.cursor/mcp.json`（Cursor 専用設定。`~/.claude/.mcp.json` は chezmoi 管理外の別リポジトリへのシンボリックリンクのため、手動でコピーした内容で自動追従はしない）
   - CLI 設定: `~/.config/cursor/cli-config.json`（permissions / statusLine / notifications 等）
   - herdr 管理下では完了・確認待ち通知は herdr の `[ui.toast]` が担当。加えて Cursor 自身の `notifications: true`（`cli-config.json`）も有効
 
@@ -97,7 +97,7 @@ chezmoi apply
 - `.claude/settings.json` - Claude Code 設定
 - `.claude/statusline-command.sh` - Claude Code statusLine スクリプト
 - `.cursor/statusline-command.sh` - Cursor Agent CLI statusLine スクリプト（Claude Code と同一）
-- `.cursor/mcp.json` - Cursor Agent CLI MCP 設定（Claude の `.mcp.json` コピー）
+- `.cursor/mcp.json` - Cursor Agent CLI 専用の MCP 設定（Claude 側とは自動連携なし）
 - `.config/cursor/cli-config.json` - Cursor Agent CLI 設定（`modify_` で部分管理、`version`/`editor` は素通り）
 - `.config/nvim/init.lua` - Neovim エントリーポイント
 - `.config/nvim/lua/config/options.lua` - Neovim 基本設定

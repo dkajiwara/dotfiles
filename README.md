@@ -19,7 +19,7 @@ chezmoi apply
 
 `.claude/settings.json` は chezmoi の [`modify_` スクリプト](https://www.chezmoi.io/reference/target-types/#modify_-scripts)（`dot_claude/modify_settings.json.tmpl`）で管理しています。管理したい内容そのものは `dot_claude/settings.base.json`（プレーンな JSON、`.chezmoiignore` 対象で単体では実体化しない）に書き、スクリプトは `chezmoi apply` のたびに現在の実機の内容を標準入力で受け取り、`enabledPlugins`・`advisorModel` の 2 つだけを実機の値のまま明示的に上書きして、それ以外は常に `settings.base.json` の内容にします。
 
-`enabledPlugins`・`advisorModel` は Claude Code 自身が `/config` やプラグイン管理から書き込むキーなので、素通りさせています。マシンごとの実行時の状態がそのまま保たれ、それ以外のキーが外部から変更された場合は `chezmoi diff`/`apply` でちゃんと検知されます（Cursor Agent CLI の `run_onchange` + `jq` と同じ発想ですが、`modify_` は対象ファイルの一部だけを管理する chezmoi の標準機構です）。
+`enabledPlugins`・`advisorModel` は Claude Code 自身が `/config` やプラグイン管理から書き込むキーなので、素通りさせています。マシンごとの実行時の状態がそのまま保たれ、それ以外のキーが外部から変更された場合は `chezmoi diff`/`apply` でちゃんと検知されます。Cursor Agent CLI の `~/.config/cursor/cli-config.json`（`dot_config/cursor/modify_cli-config.json.tmpl`）も同じ `modify_` パターンで管理しています。以前は `run_onchange_` + `jq` でしたが、fragment だけを変更してもスクリプト本体のハッシュが変わらず再実行されない問題があったため `modify_` に統一しました。
 
 ## 採用ツール
 
@@ -100,7 +100,7 @@ chezmoi apply
 - `.claude/statusline-command.sh` - Claude Code statusLine スクリプト
 - `.cursor/statusline-command.sh` - Cursor Agent CLI statusLine スクリプト（Claude Code と同一）
 - `.cursor/mcp.json` - Cursor Agent CLI MCP 設定（Claude の `.mcp.json` コピー）
-- `.config/cursor/agent-cli.fragment.json` - Cursor Agent CLI の permissions / notifications 等
+- `.config/cursor/cli-config.json` - Cursor Agent CLI 設定（`modify_` で部分管理、`version`/`editor` は素通り）
 - `.config/nvim/init.lua` - Neovim エントリーポイント
 - `.config/nvim/lua/config/options.lua` - Neovim 基本設定
 - `.config/nvim/lua/config/keymaps.lua` - グローバルキーバインド

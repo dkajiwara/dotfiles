@@ -1,0 +1,21 @@
+#!/bin/bash
+# chezmoi passes the current ~/.config/cursor/cli-config.json content on
+# stdin; stdout becomes the new content.
+#
+# Owned fields (statusLine/permissions/notifications/attribution) come from
+# agent-cli.fragment.json and are always forced. version/editor are Cursor's
+# own runtime state and are left untouched — whatever the live file
+# currently has passes through as-is.
+
+set -euo pipefail
+
+fragment="{{ .chezmoi.sourceDir }}/dot_config/cursor/agent-cli.fragment.json"
+statusline_cmd="/bin/bash {{ .chezmoi.homeDir }}/.cursor/statusline-command.sh"
+
+jq --slurp --slurpfile frag "$fragment" --arg cmd "$statusline_cmd" '
+  (.[0] // {"version":1,"editor":{"vimMode":false}}) |
+  .statusLine = {"type": "command", "command": $cmd} |
+  .permissions = $frag[0].permissions |
+  .notifications = $frag[0].notifications |
+  .attribution = $frag[0].attribution
+'

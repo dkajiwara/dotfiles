@@ -3,8 +3,7 @@
   "env": {
     "BASH_DEFAULT_TIMEOUT_MS": "600000",
     "BASH_MAX_TIMEOUT_MS": "600000",
-    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "true",
-    "PATH": "/Users/dkajiii/.local/share/mise/shims:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/dkajiii/.cargo/bin:/Users/dkajiii/.pub-cache/bin:/Users/dkajiii/.local/bin:/Users/dkajiii/go/bin:/Users/dkajiii/Library/Android/sdk/platform-tools:/Users/dkajiii/google-cloud-sdk/bin:/opt/homebrew/opt/fzf/bin"
+    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "true"
   },
   "attribution": {
     "commit": "",

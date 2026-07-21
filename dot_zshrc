@@ -34,6 +34,7 @@ export PATH="$PATH:$PYENV_ROOT/bin"
 export PATH="$PATH:$HOME/.tfenv/bin"
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 
 # 重複パスを登録しない

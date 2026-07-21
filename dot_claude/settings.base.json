@@ -3,32 +3,109 @@
   "env": {
     "BASH_DEFAULT_TIMEOUT_MS": "600000",
     "BASH_MAX_TIMEOUT_MS": "600000",
-    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "true"
+    "CLAUDE_BASH_MAINTAIN_PROJECT_WORKING_DIR": "true",
+    "PATH": "/Users/dkajiii/.local/share/mise/shims:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/dkajiii/.cargo/bin:/Users/dkajiii/.pub-cache/bin:/Users/dkajiii/.local/bin:/Users/dkajiii/go/bin:/Users/dkajiii/Library/Android/sdk/platform-tools:/Users/dkajiii/google-cloud-sdk/bin:/opt/homebrew/opt/fzf/bin"
   },
   "attribution": {
     "commit": "",
     "pr": ""
   },
   "permissions": {
-    "defaultMode": "auto",
     "allow": [
-      "Bash",
-      "Edit",
-      "Glob",
-      "GlobTool",
-      "Grep",
-      "GrepTool",
-      "LS",
-      "MultiEdit",
       "Read",
-      "TodoRead",
+      "Glob",
+      "Grep",
+      "LS",
       "TodoWrite",
       "WebFetch",
       "WebSearch",
-      "Write",
-      "mcp__pencil",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git restore:*)",
       "Bash(git checkout -b:*)",
-      "Bash(git checkout -B:*)"
+      "Bash(git checkout -B:*)",
+      "Bash(git worktree list:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git merge-base:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh run list:*)",
+      "Bash(make test:*)",
+      "Bash(make analyze:*)",
+      "Bash(make check:*)",
+      "Bash(make format:*)",
+      "Bash(make gen:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(echo:*)",
+      "Bash(date:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(lsof:*)",
+      "Bash(ps:*)",
+      "Bash(tree:*)",
+      "Bash(wc:*)",
+      "Bash(which:*)",
+      "Bash(jq:*)",
+      "Bash(du:*)",
+      "Bash(file:*)",
+      "Bash(crit status:*)",
+      "Bash(crit comments:*)",
+      "Bash(crit comment:*)",
+      "Bash(awk:*)",
+      "Bash(printenv:*)",
+      "Bash(env)",
+      "Bash(open:*)",
+      "Bash(pbpaste:*)",
+      "Bash(bat:*)",
+      "Bash(mise:*)",
+      "Bash(flutter test:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(flutter pub get:*)",
+      "Bash(flutter pub outdated:*)",
+      "Bash(flutter pub deps:*)",
+      "Bash(flutter doctor:*)",
+      "Bash(flutter clean:*)",
+      "Bash(dart analyze:*)",
+      "Bash(dart format:*)",
+      "Bash(dart pub get:*)",
+      "Bash(dart pub outdated:*)",
+      "Bash(dart run build_runner:*)",
+      "Bash(git fetch:*)",
+      "Bash(git bisect:*)",
+      "Bash(gh auth status:*)",
+      "Bash(gh workflow view:*)",
+      "Bash(gh workflow list:*)",
+      "Bash(gh api:*)",
+      "Skill(*)",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "mcp__claude-in-chrome__navigate",
+      "mcp__claude-in-chrome__read_page",
+      "mcp__claude-in-chrome__read_console_messages",
+      "mcp__claude-in-chrome__read_network_requests",
+      "mcp__claude-in-chrome__get_page_text",
+      "mcp__claude-in-chrome__find",
+      "mcp__claude-in-chrome__tabs_create_mcp",
+      "mcp__claude_ai_Atlassian__getJiraIssue",
+      "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
+      "mcp__claude_ai_Atlassian__getConfluencePage",
+      "mcp__claude_ai_Atlassian__search",
+      "mcp__claude_ai_Atlassian__atlassianUserInfo",
+      "mcp__claude_ai_Atlassian__getAccessibleAtlassianResources",
+      "mcp__claude_ai_Atlassian__searchConfluenceUsingCql",
+      "mcp__claude_ai_Atlassian__lookupJiraAccountId",
+      "mcp__claude_ai_Atlassian__getVisibleJiraProjects",
+      "mcp__claude_ai_Atlassian__getJiraProjectIssueTypesMetadata",
+      "mcp__claude_ai_Atlassian__getTransitionsForJiraIssue"
     ],
     "deny": [
       "Bash(rm -rf /)",
@@ -77,13 +154,52 @@
       "Bash(gh api --method DELETE:*)",
       "Bash(gh workflow disable:*)",
       "Bash(gh workflow enable:*)",
-      "Bash(gh workflow run:*)"
+      "Bash(gh workflow run:*)",
+      "Bash(crit comment --clear:*)"
+    ],
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)",
+      "Bash(rm -rf:*)"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "claude-fable-5[1m]",
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/notify.sh 'Claude Code: 確認待ち'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/notify.sh 'Claude Code: タスク完了'"
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
   },
-  "language": "japanese",
-  "tui": "fullscreen"
+  "extraKnownMarketplaces": {
+    "kit": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/dkajiii/Documents/workspace/claude-plugins"
+      }
+    }
+  },
+  "language": "japanese"
 }

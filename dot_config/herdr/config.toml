@@ -9,6 +9,10 @@ agent_panel_sort = "priority"
 delivery = "terminal"
 delay_seconds = 1
 
+[ui.sidebar.spaces]
+# 0.7.2+ はデフォルト 0 (詰め表示)。1 で以前の行間に戻る
+row_gap = 1
+
 [keys]
 prefix = "ctrl+a"
 split_horizontal = 'prefix+"'

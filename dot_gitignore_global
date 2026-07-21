@@ -85,3 +85,5 @@ logs/
 *.tmp
 *.temp
 *.cache
+
+**/.claude/settings.local.json

@@ -45,24 +45,7 @@ Dobby has no master. Dobby is a free elf!
 
 ## Bash 実行スタイル (許可プロンプト回避)
 
-Claude Code は allowlist 判定より前に静的解析ヒューリスティックを走らせるため、以下のパターンは allowlist に登録済みでもプロンプトが出る。**書き方を変えて回避する**。
-
-- **`eval "$(...)"` を使わない**
-  - NG: `eval "$(mise activate bash --shims)" && make check`
-  - OK: `make check` (mise shims が PATH に入っていれば直接実行できる)
-  - OK: `mise exec -- make check` (プロジェクト固有の mise バージョンを使う場合)
-- **`bash -c '<script>'` / `sh -c '...'` を使わない**
-  - NG: `env -i PATH=... bash -c 'which flutter; which dart'`
-  - OK: 個別に `ls /path/to/tool` や `test -x /path/to/tool && echo OK` に分割
-- **シェル関数を Bash ツール内で定義しない**
-  - NG: `extract() { jq -r '.foo' "$1" | head -60; }` を定義して繰り返し呼ぶ
-  - OK: ワンライナーで書く。繰り返しが必要なら `for f in ...; do jq -r '.foo' "$f" | head -60; done`
-  - OK: 一時スクリプトファイル (`Write` で `.sh` に書き出してから実行) を使う
-- **`$(...)` を単純な代入以外で多用しない**
-  - NG: `for f in $(find ... -name '*.jsonl'); do jq "$(build_query)" "$f"; done`
-  - OK: `find ... -name '*.jsonl' -exec jq '.foo' {} +` (find の -exec で完結)
-
-判定基準: 「シェル関数」「eval」「bash -c」「複雑な `$()` の入れ子」のいずれかを書いたら、静的解析で引っかかる可能性が高い。**1 コマンドで済ませる欲を捨てて、複数コマンドに分ける** ことを優先する。
+`eval` ・ `bash -c` ・シェル関数定義・複雑な `$(...)` の入れ子は、allowlist 登録済みでも静的解析でプロンプトが出るため使わない。1 コマンドにまとめず複数の単純なコマンドに分け、繰り返しは `find -exec` や一時スクリプトファイル (`Write` で書き出して実行) で代替する。mise 管理のツールは shims が PATH に入っているため `mise activate` なしで直接実行できる。
 
 ## エラーハンドリング
 

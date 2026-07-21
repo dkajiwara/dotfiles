@@ -17,6 +17,7 @@ claude_path="$HOME/.local/share/mise/shims"
 claude_path="$claude_path:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 claude_path="$claude_path:$HOME/.cargo/bin:$HOME/.pub-cache/bin:$HOME/.local/bin:$HOME/go/bin"
 claude_path="$claude_path:$HOME/Library/Android/sdk/platform-tools:$HOME/google-cloud-sdk/bin"
+claude_path="$claude_path:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 claude_path="$claude_path:/opt/homebrew/opt/fzf/bin"
 
 jq --slurp --slurpfile base "$base" --arg path "$claude_path" '

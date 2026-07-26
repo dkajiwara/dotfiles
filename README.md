@@ -21,7 +21,10 @@ chezmoi apply
 
 `~/.claude/settings.json` と `~/.config/cursor/cli-config.json` は、エージェント自身が実行時に書き込むキーがあるため、ファイル全体ではなく一部だけを [`modify_` スクリプト](https://www.chezmoi.io/reference/target-types/#modify_-scripts)で管理しています（`chezmoi apply` のたびに実機の内容を標準入力で受け取り、管理対象のキーだけを上書きして出力）。
 
-- **Claude**: `model`・`advisorModel`（`/config` で書き換わる）は実機の値のまま素通り（`model` は実機に値が無いときだけ `settings.base.json` の値を初期値として使用）。`enabledPlugins` は素通りではなくマージで、`settings.base.json` にはどのマシンにも入れておきたいプラグイン（追加セットアップ不要な skills/agents/commands のみ）だけを記録し、同じキーが実機にあればそちらを優先します。よって新しいマシンでは共通セットが自動で入り、`/plugin` での有効・無効の切り替えは apply で巻き戻りません。認証や外部バイナリが要るもの（`figma`・`chrome-devtools-mcp`・各 LSP）は base に入れず実機任せ。それ以外（`permissions`・`hooks`・`statusLine`・`extraKnownMarketplaces` 等）を管理
+- **Claude**: `permissions`・`hooks`・`statusLine`・`extraKnownMarketplaces` 等は `settings.base.json` の内容で常に上書き。次のキーだけ扱いが異なる
+  - `model`・`advisorModel`（`/config` で書き換わる）は実機の値のまま素通り。`model` は実機に値が無いときだけ base の値を初期値として使用
+  - `enabledPlugins` は素通りではなくマージ。どのマシンにも入れておきたいプラグインだけを base に記録し（判断基準は「追加セットアップが要らない skills/agents/commands のみ」。認証や外部バイナリが要る `figma`・`chrome-devtools-mcp`・各 LSP は入れない）、同じキーが実機にあればそちらを優先
+  - よって新しいマシンでは共通セットが自動で入り、`/plugin` で無効化した状態も apply で巻き戻らない。ただしアンインストールしてキーごと消えたものは base から再び入るため、共通セットから恒久的に外すときは `dot_claude/settings.base.json` を編集する
 - **Cursor**: `version`・`editor`（Cursor 自身が書き込む）は実機の値のまま素通りし、それ以外（`permissions`・`statusLine`・`notifications`・`attribution`）を管理
 - `modify_` を選んでいるのは、`chezmoi apply` のたびに実機の現在値とマージでき、管理対象キーの外部変更もきちんと検知されるため
 
@@ -151,6 +154,8 @@ chezmoi apply
 # リポジトリに反映
 cd ~/.local/share/chezmoi
 git add .
-git commit -m "Update"
+git commit -m "feat(zsh): add wt for switching git worktrees"
 git push
 ```
+
+コミットメッセージは Conventional Commits（`type(scope): subject`）。subject は英語で、変更した理由や背景は本文に書きます。

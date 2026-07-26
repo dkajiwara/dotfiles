@@ -3,9 +3,18 @@
 # stdout becomes the new content.
 #
 # Base content (everything chezmoi owns) lives in settings.base.json.
-# enabledPlugins / advisorModel are explicitly passed through as-is from the
-# live file, since Claude Code itself writes them via /config and plugin
-# management — everything else always comes from the base.
+# advisorModel is passed through as-is from the live file, since Claude Code
+# itself writes it via /config. model works the same way, except the base value
+# is kept as the fallback so a fresh machine still starts from a known model.
+#
+# enabledPlugins is a merge, not a passthrough: the base holds the plugins that
+# should exist on every machine (skills/agents/commands only — nothing needing
+# per-machine setup), and the live value wins per key, so enabling or disabling
+# a plugin from /plugin is never reverted by the next apply. Machine-specific
+# plugins (figma, chrome-devtools-mcp, the LSP ones) stay out of the base and
+# just ride along from the live file.
+#
+# Everything else always comes from the base.
 
 set -euo pipefail
 
@@ -23,7 +32,11 @@ claude_path="$claude_path:/opt/homebrew/opt/fzf/bin"
 jq --slurp --slurpfile base "$base" --arg path "$claude_path" '
   ($base[0]) as $base |
   (.[0] // {}) as $live |
-  ($base + {enabledPlugins: ($live.enabledPlugins // {}), advisorModel: $live.advisorModel}) |
+  ($base + {
+    enabledPlugins: (($base.enabledPlugins // {}) + ($live.enabledPlugins // {})),
+    model: ($live.model // $base.model),
+    advisorModel: $live.advisorModel
+  }) |
   .env.PATH = $path |
   if .advisorModel == null then del(.advisorModel) else . end
 '

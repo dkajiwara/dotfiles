@@ -153,12 +153,13 @@
       "Bash(gh api --method DELETE:*)",
       "Bash(gh workflow disable:*)",
       "Bash(gh workflow enable:*)",
-      "Bash(gh workflow run:*)",
       "Bash(crit comment --clear:*)"
     ],
     "ask": [
-      "Bash(git push:*)",
-      "Bash(gh pr create:*)",
+      "Bash(gh workflow run *production*)",
+      "Bash(gh workflow run *private.yml*)",
+      "Bash(gh workflow run *owner-access.yml*)",
+      "Bash(gh workflow run *operations.yml*)",
       "Bash(rm -rf:*)"
     ],
     "defaultMode": "auto"
